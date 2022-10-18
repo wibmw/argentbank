@@ -1,0 +1,13 @@
+// Base
+@import './sass/base';
+@import './sass/typography';
+// Pages
+@import './pages/home/home';
+@import './pages/sign_in/signIn';
+@import './pages/user/user';
+// Static Components
+@import './components/static/footer/footer';
+@import './components/static/header/header';
+// components
+@import './components/features/features';
+@import './components/hero/hero';
