@@ -8,22 +8,29 @@ import SignIn from './pages/sign_in/SignIn'
 
 import './style/style.css'
 import Footer from './components/static/footer/Footer'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
+import Profile from './pages/profile/Profile'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     {' '}
     <Router>
-      <Header />
-      <Routes>
-        {/** *********** Error Page ******************/}
-        <Route path={'*'} element={<Error />} />
-        {/** *********** Homepage without params ******************/}
-        <Route path={'/'} element={<Home />} />
-        {/** *********** Sign In Page ******************/}
-        <Route path={'/sign-in'} element={<SignIn />} />
-      </Routes>
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <Routes>
+          {/** *********** Error Page ******************/}
+          <Route path={'*'} element={<Error />} />
+          {/** *********** Homepage without params ******************/}
+          <Route path={'/'} element={<Home />} />
+          {/** *********** Sign In Page ******************/}
+          <Route path={'/sign-in'} element={<SignIn />} />
+          {/** *********** Profile Page ******************/}
+          <Route path={'/profile'} element={<Profile />} />
+        </Routes>
+        <Footer />
+      </Provider>
     </Router>
   </React.StrictMode>,
 )
