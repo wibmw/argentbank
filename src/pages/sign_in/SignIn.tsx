@@ -1,12 +1,11 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { RootState } from '../../redux/store'
-
-import { useLoginMutation, useProfileMutation, LoginRequest } from '../../redux/services/auth.service'
+import React, { useState, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '../../redux/hooks/store'
+import { useLoginMutation, LoginRequest } from '../../redux/services/auth.service'
+import { setToken } from '../../redux/slices/auth.slice'
 
 const SignIn = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const [formState, setFormState] = useState<LoginRequest>({
@@ -17,17 +16,19 @@ const SignIn = () => {
   const handleChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) =>
     setFormState((prev) => ({ ...prev, [name]: value }))
 
-  const [login, { data, status }] = useLoginMutation()
+  const [login, { data, status, error, isSuccess, isError }] = useLoginMutation()
 
-  const tryToLogin = async () => {
-    try {
-      await login(formState)
-      console.log(data)
-      navigate('/profile')
-    } catch (err: any) {
-      console.log(data.token)
-      console.log('error')
+  if (isError) {
+    if ((error as any).data.message === 'User not Verified') {
+      console.log(error)
     }
+  }
+  if (isSuccess) {
+    const token = data['body']['token']
+    dispatch(setToken({ token: token }))
+    console.log(token)
+    localStorage.setItem('token', token)
+    navigate('/profile')
   }
 
   return (
@@ -50,9 +51,14 @@ const SignIn = () => {
               <input type='checkbox' id='remember-me' />
               <label htmlFor='remember-me'>Remember me</label>
             </div>
-            <button className='sign-in-button' onClick={tryToLogin}>
+            <div
+              className='sign-in-button'
+              onClick={async () => {
+                await login(formState)
+              }}
+            >
               Sign In
-            </button>
+            </div>
           </form>
         </section>
       </main>

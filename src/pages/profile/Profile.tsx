@@ -1,16 +1,16 @@
 import React from 'react'
-import { useProfileMutation } from '../../redux/services/auth.service'
+import { useTypedSelector } from '../../redux/hooks/store'
+import { useLoginMutation } from '../../redux/services/auth.service'
 
 const Profile = () => {
-  const [attemptAccess, { data, error, isLoading }] = useProfileMutation()
-
+    const { token } = useTypedSelector((state) => state.auth)
+  const [login, { data, status, isLoading, error }] = useLoginMutation()
+    console.log(token)
   return (
     <React.Fragment>
       {/** *********** Profile Page ******************/}
       <section>
-        <button onClick={() => attemptAccess()} disabled={isLoading}>
-          Make an authenticated request
-        </button>
+        <button disabled={isLoading}>Make an authenticated request</button>
         {data ? (
           <>
             Data:
