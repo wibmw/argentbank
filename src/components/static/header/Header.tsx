@@ -1,8 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import argentBankLogo from '../../../assets/img/argentBankLogo.png'
+import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
+import { setToken } from '../../../redux/slices/auth.slice'
 
 const Header = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const { token, firstName } = useTypedSelector((state) => state.auth)
+  // console.log(token)
+  const logout = () => {
+    dispatch(setToken({ token: null }))
+    sessionStorage.removeItem('token')
+    navigate('/sign-in')
+  }
+
   return (
     <React.Fragment>
       {/** *********** Header Section ******************/}
@@ -13,10 +26,25 @@ const Header = () => {
             <h1 className='sr-only'>Argent Bank</h1>
           </Link>
           <div>
-            <Link to={'/sign-in'} className='main-nav-item'>
-              <i className='fa fa-user-circle'></i>
-              Sign In
-            </Link>
+            {token ? (
+              <>
+                <Link to={'/user'} className='main-nav-item'>
+                  <i className='fa fa-user-circle'></i>
+                  {firstName}
+                </Link>
+                <Link to={'/'} className='main-nav-item' onClick={logout}>
+                  <i className='fa fa-sign-out'></i>
+                  Sign Out
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to={'/sign-in'} className='main-nav-item'>
+                  <i className='fa fa-user-circle'></i>
+                  Sign In
+                </Link>
+              </>
+            )}
           </div>
         </nav>
       </header>

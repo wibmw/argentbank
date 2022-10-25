@@ -1,3 +1,4 @@
+// TODO: Check utility of this function
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { setToken } from '../slices/auth.slice'

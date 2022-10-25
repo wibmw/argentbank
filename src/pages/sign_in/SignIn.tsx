@@ -1,22 +1,22 @@
 import React, { useState, ChangeEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../redux/hooks/store'
+import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { useLoginMutation, LoginRequest } from '../../redux/services/auth.service'
 import { setToken } from '../../redux/slices/auth.slice'
 
 const SignIn = () => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch(),
+    navigate = useNavigate(),
+    { token } = useTypedSelector((state) => state.auth),
+    [login, { data, error, isSuccess, isError }] = useLoginMutation(),
+    [formState, setFormState] = useState<LoginRequest>({
+      email: '',
+      password: '',
+    }),
+    handleChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) =>
+      setFormState((prev) => ({ ...prev, [name]: value }))
 
-  const [formState, setFormState] = useState<LoginRequest>({
-    email: '',
-    password: '',
-  })
-
-  const handleChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) =>
-    setFormState((prev) => ({ ...prev, [name]: value }))
-
-  const [login, { data, status, error, isSuccess, isError }] = useLoginMutation()
+  if (token) navigate('/profile')
 
   if (isError) {
     if ((error as any).data.message === 'User not Verified') {
@@ -26,8 +26,7 @@ const SignIn = () => {
   if (isSuccess) {
     const token = data['body']['token']
     dispatch(setToken({ token: token }))
-    console.log(token)
-    localStorage.setItem('token', token)
+    sessionStorage.setItem('token', token)
     navigate('/profile')
   }
 
@@ -65,4 +64,5 @@ const SignIn = () => {
     </React.Fragment>
   )
 }
+
 export default SignIn

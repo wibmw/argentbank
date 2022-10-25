@@ -1,27 +1,79 @@
-import React from 'react'
-import { useTypedSelector } from '../../redux/hooks/store'
-import { useLoginMutation } from '../../redux/services/auth.service'
+import React, { useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
+import { useProfileMutation } from '../../redux/services/auth.service'
+import { setFirstName } from '../../redux/slices/auth.slice'
 
 const Profile = () => {
-    const { token } = useTypedSelector((state) => state.auth)
-  const [login, { data, status, isLoading, error }] = useLoginMutation()
-    console.log(token)
+  const dispatch = useAppDispatch(),
+    navigate = useNavigate(),
+    { state } = useLocation(),
+    { token } = useTypedSelector((state) => state.auth),
+    [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
+
+  if (!token) navigate('/sign-in')
+
+  let firstName, lastName
+
+  useEffect(() => {
+    profile()
+  }, [profile, state])
+
+  if (isError) {
+    if ((error as any).data.message === 'User not Verified') {
+      console.log(status)
+      console.log(error)
+    }
+  }
+  if (isSuccess) {
+    ;({ firstName, lastName } = data['body'])
+    dispatch(setFirstName({ firstName: firstName }))
+  }
+
   return (
     <React.Fragment>
-      {/** *********** Profile Page ******************/}
-      <section>
-        <button disabled={isLoading}>Make an authenticated request</button>
-        {data ? (
-          <>
-            Data:
-            <pre>{JSON.stringify(data, null, 2)}</pre>
-          </>
-        ) : error ? (
-          <>
-            Error: <pre>{JSON.stringify(error, null, 2)}</pre>
-          </>
-        ) : null}
-      </section>
+      {/** *********** User Page ******************/}
+      <main className='main bg-dark'>
+        <div className='header'>
+          <h1>
+            Welcome back
+            <br />
+            {firstName + ' ' + lastName + '!'}
+          </h1>
+          <button className='edit-button'>Edit Name</button>
+        </div>
+        <h2 className='sr-only'>Accounts</h2>
+        <section className='account'>
+          <div className='account-content-wrapper'>
+            <h3 className='account-title'>Argent Bank Checking (x8349)</h3>
+            <p className='account-amount'>$2,082.79</p>
+            <p className='account-amount-description'>Available Balance</p>
+          </div>
+          <div className='account-content-wrapper cta'>
+            <button className='transaction-button'>View transactions</button>
+          </div>
+        </section>
+        <section className='account'>
+          <div className='account-content-wrapper'>
+            <h3 className='account-title'>Argent Bank Savings (x6712)</h3>
+            <p className='account-amount'>$10,928.42</p>
+            <p className='account-amount-description'>Available Balance</p>
+          </div>
+          <div className='account-content-wrapper cta'>
+            <button className='transaction-button'>View transactions</button>
+          </div>
+        </section>
+        <section className='account'>
+          <div className='account-content-wrapper'>
+            <h3 className='account-title'>Argent Bank Credit Card (x8349)</h3>
+            <p className='account-amount'>$184.30</p>
+            <p className='account-amount-description'>Current Balance</p>
+          </div>
+          <div className='account-content-wrapper cta'>
+            <button className='transaction-button'>View transactions</button>
+          </div>
+        </section>
+      </main>
     </React.Fragment>
   )
 }

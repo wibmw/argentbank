@@ -2,17 +2,19 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { api } from '../services/auth.service'
 import type { RootState } from '../store'
 
-type AuthState = {
+type Auth = {
   token: string | null
+  firstName: string | null
 }
 
-const initialState: AuthState = {
+const initialValues: Auth = {
   token: null,
+  firstName: null,
 }
 
 const slice = createSlice({
   name: 'auth',
-  initialState: { token: null } as AuthState,
+  initialState: initialValues,
   reducers: {
     /* 
   },
@@ -24,12 +26,15 @@ const slice = createSlice({
     setToken: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token
     },
+    setFirstName: (state, action: PayloadAction<{ firstName: string }>) => {
+      state.firstName = action.payload.firstName
+    },
     defaultState: (state) => {
-      state = initialState
+      state = initialValues
     },
   },
 })
 
 // export const setToken = (state: RootState) => state.auth.token // slice.actions
-export const { setToken } = slice.actions
+export const { setToken, setFirstName } = slice.actions
 export default slice.reducer
