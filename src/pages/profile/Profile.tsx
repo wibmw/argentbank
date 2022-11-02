@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { useProfileMutation } from '../../redux/services/auth.service'
 import { setFirstName } from '../../redux/slices/auth.slice'
+import { getLocalToken } from '../../utils/localData'
 
 const Profile = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
     { state } = useLocation(),
-    { token } = useTypedSelector((state) => state.auth),
+    token = getLocalToken(), //  useTypedSelector((state) => state.auth),
     [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
 
+  console.log(token && token)
   if (!token) navigate('/sign-in')
 
   let firstName, lastName
@@ -32,7 +34,7 @@ const Profile = () => {
 
   return (
     <React.Fragment>
-      {/** *********** User Page ******************/}
+      {/** *********** Profile Page ******************/}
       <main className='main bg-dark'>
         <div className='header'>
           <h1>
@@ -40,7 +42,9 @@ const Profile = () => {
             <br />
             {firstName + ' ' + lastName + '!'}
           </h1>
-          <button className='edit-button'>Edit Name</button>
+          <Link to={'/user'}>
+            <button className='edit-button'>Edit Name</button>
+          </Link>
         </div>
         <h2 className='sr-only'>Accounts</h2>
         <section className='account'>

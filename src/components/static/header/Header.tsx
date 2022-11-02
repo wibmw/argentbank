@@ -3,16 +3,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import argentBankLogo from '../../../assets/img/argentBankLogo.png'
 import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
 import { setToken } from '../../../redux/slices/auth.slice'
+import { getLocalToken } from '../../../utils/localData'
 
 const Header = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { token, firstName } = useTypedSelector((state) => state.auth)
+  const {  firstName } = useTypedSelector((state) => state.auth),
+  token = getLocalToken()
   // console.log(token)
   const logout = () => {
     dispatch(setToken({ token: null }))
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
+    localStorage.clear
     navigate('/sign-in')
   }
 

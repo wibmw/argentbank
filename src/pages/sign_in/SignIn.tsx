@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { useLoginMutation, LoginRequest } from '../../redux/services/auth.service'
 import { setToken } from '../../redux/slices/auth.slice'
+import { getLocalToken, setLocalToken } from '../../utils/localData'
 
 const SignIn = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
-    { token } = useTypedSelector((state) => state.auth),
+    token = getLocalToken(), // useTypedSelector((state) => state.auth),
     [login, { data, error, isSuccess, isError }] = useLoginMutation(),
     [formState, setFormState] = useState<LoginRequest>({
       email: '',
@@ -24,9 +25,9 @@ const SignIn = () => {
     }
   }
   if (isSuccess) {
-    const token = data['body']['token']
-    dispatch(setToken({ token: token }))
-    sessionStorage.setItem('token', token)
+    const tokenResponse = data['body']['token']
+    dispatch(setToken({ token: tokenResponse }))
+    setLocalToken(tokenResponse)
     navigate('/profile')
   }
 
