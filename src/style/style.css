@@ -1,3 +1,4 @@
+/******************* COLORS ************************/
 @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 body {
   margin: 0;
@@ -31,9 +32,8 @@ body {
   white-space: nowrap !important; /* 3 */
 }
 
-.sign-in-button {
+.form-button {
   display: block;
-  width: 100%;
   padding: 8px;
   font-size: 1.1rem;
   font-weight: bold;
@@ -43,7 +43,7 @@ body {
   color: #fff;
 }
 
-.sign-in-content {
+.form-content {
   box-sizing: border-box;
   background-color: white;
   width: 300px;
@@ -52,7 +52,7 @@ body {
   padding: 2rem;
 }
 
-.sign-in-icon {
+.form-icon {
   font-size: 5rem;
 }
 
@@ -78,6 +78,29 @@ body {
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;
+}
+
+/**************** Error control ****************/
+.input-wrapper[data-error]::after {
+  content: attr(data-error);
+  font-size: 0.8em;
+  font-weight: 600;
+  color: rgba(255, 0, 0, 0.587);
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.input-wrapper[data-error-visible=true]::after {
+  opacity: 1;
+  margin-bottom: 5px;
+}
+
+.input-wrapper[data-error-visible=true] input {
+  border: 2px solid rgb(255, 0, 0);
+  border-radius: 3px;
 }
 
 .account {

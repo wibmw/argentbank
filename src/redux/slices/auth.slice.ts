@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { api } from '../services/auth.service'
-import type { RootState } from '../store'
+import { ProfileCredentials, ProfileNames } from '../services/auth.service'
 
 type Auth = {
   token: string | null
   firstName: string | null
+  namesForm: ProfileNames | null
+  credentialsForm: ProfileCredentials | null
 }
 
 const initialValues: Auth = {
   token: null,
   firstName: null,
+  namesForm: null,
+  credentialsForm: null,
 }
 
 const slice = createSlice({
@@ -29,6 +32,12 @@ const slice = createSlice({
     setFirstName: (state, action: PayloadAction<{ firstName: string }>) => {
       state.firstName = action.payload.firstName
     },
+    setNamesForm: (state, action: PayloadAction<{ namesForm: ProfileNames }>) => {
+      state.namesForm = action.payload.namesForm
+    },
+    setCredentialsForm: (state, action: PayloadAction<{ credentialsForm: ProfileCredentials }>) => {
+      state.credentialsForm = action.payload.credentialsForm
+    },
     defaultState: (state) => {
       state = initialValues
     },
@@ -36,5 +45,5 @@ const slice = createSlice({
 })
 
 // export const setToken = (state: RootState) => state.auth.token // slice.actions
-export const { setToken, setFirstName } = slice.actions
+export const { setToken, setFirstName, setNamesForm, setCredentialsForm } = slice.actions
 export default slice.reducer

@@ -4,8 +4,9 @@ import moneyIcon from '../../assets/img/icon-money.png'
 import securityIcon from '../../assets/img/icon-security.png'
 
 const FeaturesItem = (props: { title: string; content: string; imgName: string }) => {
+  const { title, content, imgName } = props
   const icon = () => {
-    switch (props.imgName) {
+    switch (imgName) {
       case 'Cat':
         return catIcon
       case 'Money':
@@ -21,9 +22,9 @@ const FeaturesItem = (props: { title: string; content: string; imgName: string }
     <React.Fragment>
       {/** *********** Feature's Item Section ******************/}
       <div className='feature-item'>
-        <img src={icon()} alt={`${props.imgName} Icon`} className='feature-icon' />
-        <h3 className='feature-item-title'>{props.title}</h3>
-        <p>{props.content}</p>
+        <img src={icon()} alt={`${imgName} Icon`} className='feature-icon' />
+        <h3 className='feature-item-title'>{title}</h3>
+        <p>{content}</p>
       </div>
     </React.Fragment>
   )

@@ -7,6 +7,7 @@ import SignIn from './pages/sign_in/SignIn'
 import Footer from './components/static/footer/Footer'
 import Profile from './pages/profile/Profile'
 import User from './pages/user/User'
+import SignUp from './pages/sign_up/SignUp'
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
           <Route path={'/'} element={<Home />} />
           {/** *********** Sign In Page ******************/}
           <Route path={'/sign-in'} element={<SignIn />} />
+          {/** *********** Sign Up Page ******************/}
+          <Route path={'/sign-up'} element={<SignUp />} />
           {/** *********** Profile Page ******************/}
           <Route path={'/user'} element={<User />} />
           {/** *********** Profile Page ******************/}
