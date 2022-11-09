@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Credentials from '../../components/forms/Credentials'
 import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
@@ -8,6 +8,7 @@ import { getLocalToken, setLocalToken } from '../../utils/localDatas'
 
 const SignIn = () => {
   const dispatch = useAppDispatch(),
+    checkbox = useRef(null),
     navigate = useNavigate(),
     token = getLocalToken(), // useTypedSelector((state) => state.auth),
     [login, { data, status, error, isSuccess, isError }] = useLoginMutation()
@@ -15,15 +16,13 @@ const SignIn = () => {
   if (token) navigate('/profile')
 
   if (isSuccess) {
+    console.log('success')
     const tokenResponse = data['body']['token']
     dispatch(setToken({ token: tokenResponse }))
-    setLocalToken(tokenResponse)
+    setLocalToken(tokenResponse, checkbox.current.checked)
     navigate('/profile')
   } else if (isError) {
     console.log(status)
-    if ((error as any).data.message === 'User not Verified') {
-      console.log('User not Verified')
-    }
     console.log(error)
   }
 
@@ -45,7 +44,7 @@ const SignIn = () => {
           <form>
             <Credentials />
             <div className='input-remember'>
-              <input type='checkbox' id='remember-me' />
+              <input ref={checkbox} type='checkbox' id='remember-me' />
               <label htmlFor='remember-me'>Remember me</label>
             </div>
             <div
@@ -56,6 +55,7 @@ const SignIn = () => {
             >
               Sign In
             </div>
+            {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
             <br />
             <Link to={'/sign-up'}>Create a new account</Link>
           </form>

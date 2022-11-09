@@ -4,18 +4,18 @@ import argentBankLogo from '../../../assets/img/argentBankLogo.png'
 import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
 import { setToken } from '../../../redux/slices/auth.slice'
 import { getLocalToken } from '../../../utils/localDatas'
+import Cookies from 'universal-cookie'
 
 const Header = () => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-
-  const { firstName } = useTypedSelector((state) => state.auth),
-    token = getLocalToken()
+  const dispatch = useAppDispatch(),
+    navigate = useNavigate(),
+    { firstName } = useTypedSelector((state) => state.auth),
+    token = getLocalToken(),
+    cookie = new Cookies()
   // console.log(token)
   const logout = () => {
     dispatch(setToken({ token: null }))
-    localStorage.removeItem('token')
-    localStorage.clear
+    cookie.remove('token', { path: '/' })
     navigate('/sign-in')
   }
 

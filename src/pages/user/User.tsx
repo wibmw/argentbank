@@ -6,7 +6,6 @@ import { useUpdateProfileMutation } from '../../redux/services/auth.service'
 import { getLocalToken } from '../../utils/localDatas'
 
 const User = () => {
-  // const { token } = useTypedSelector((state) => state.auth)
   const token = getLocalToken(),
     [updateProfile, { status, error, isSuccess, isError }] = useUpdateProfileMutation(),
     navigate = useNavigate()
@@ -47,6 +46,7 @@ const User = () => {
             >
               Update your profile
             </div>
+            {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
           </form>
         </section>
       </main>

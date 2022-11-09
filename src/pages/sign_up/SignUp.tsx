@@ -4,17 +4,18 @@ import Credentials from '../../components/forms/Credentials'
 import Names from '../../components/forms/Names'
 import { useTypedSelector } from '../../redux/hooks/store'
 import { SignupRequest, useSignupMutation } from '../../redux/services/auth.service'
+import { getLocalToken } from '../../utils/localDatas'
 
 const SignUp = () => {
-  const [signUp, { status, error, isSuccess, isError }] = useSignupMutation()
-  const navigate = useNavigate()
+  const [signUp, { status, error, isSuccess, isError }] = useSignupMutation(),
+    navigate = useNavigate(),
+    token = getLocalToken()
+
+  if (token) navigate('/profile')
 
   if (isSuccess) navigate('/sign-in')
   else if (isError) {
     console.log(status)
-    if ((error as any).data.message === 'User not Verified') {
-      console.log('User not Verified')
-    }
     console.log(error)
   }
 
@@ -54,6 +55,7 @@ const SignUp = () => {
             >
               Create your account
             </div>
+            {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
           </form>
         </section>
       </main>

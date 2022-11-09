@@ -18,14 +18,14 @@ const initialValues: Auth = {
 const slice = createSlice({
   name: 'auth',
   initialState: initialValues,
-  reducers: {
-    /* 
+
+  /* 
   },
   extraReducers: (builder) => {
     builder.addMatcher(api.endpoints.login.matchFulfilled, (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token
     }) */
-
+  reducers: {
     setToken: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token
     },

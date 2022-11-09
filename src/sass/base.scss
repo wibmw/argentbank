@@ -79,6 +79,12 @@ body {
 }
 
 /**************** Error control ****************/
+p[data-error] {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: rgba(255, 0, 0, 0.587);
+}
+
 .input-wrapper[data-error]::after {
   content: attr(data-error);
   font-size: 0.8em;
@@ -96,7 +102,7 @@ body {
 }
 .input-wrapper[data-error-visible='true'] input {
   border: 2px solid rgb(255, 0, 0);
-  border-radius:3px;
+  border-radius: 3px;
 }
 
 .account {

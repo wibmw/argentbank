@@ -26,7 +26,7 @@ export const emailCheck = (element: HTMLInputElement) => {
 
 // check password function
 export const passwordCheck = (element: HTMLInputElement) => {
-  const isNotValid = false // !/^[a-zA-Z]{8,}$/.test(element.value)
+  const isNotValid = false // !/^[a-zA-Z0-9._-+*]{8,}$/.test(element.value)
   return isError(element, isNotValid, 'Invalid password !')
 }
 
