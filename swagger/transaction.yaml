@@ -1,0 +1,248 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API Documentation - Transactions
+  description: |-
+    API for transactions that must allow users to:
+    - view all their transactions for the current month
+    - view the details of a transaction in another view
+    - add, modify or delete information on a transaction
+
+    Some useful links:
+    - [Bank Argent repository](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)
+    - [User API definition for project](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API/swagger.yaml)
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/profile/monthTransactions:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Find transactions of the provided month
+      description: Return all transactions created in the provided month.
+      operationId: findTransactionsByMonth
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Month Transactions List Payload
+          required: true
+          schema:
+            $ref: '#/definitions/MonthTransactions'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Current transactions retrieved successully
+          schema:
+            $ref: '#/definitions/MonthTransactionsResponse'
+        '400':
+          description: Invalid ID or month
+        '500':
+          description: Internal Server Error
+  /user/profile/transaction:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Find the provided transaction
+      description: Return informations of the selected transaction.
+      operationId: findTransaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Selected Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionID'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Selected transaction retrieved successully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/addTransaction:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Create a new transaction
+      description: Create a new transaction with provided informations
+      operationId: createTransaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Transaction Informations Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction created successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  
+  /user/profile/updateTransaction:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Update transaction
+      description: Update a transaction with provided informations
+      operationId: updateTransaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Transaction Informations Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/deleteTransaction:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Delete transaction
+      description: Delete a transaction with provided informations
+      operationId: deleteTransaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Selected Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionID'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction deleted successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  MonthTransactions:
+    properties:
+      id:
+        type: string
+        description: User id
+      month:
+        type: string
+        description: Selected month (date String))
+  MonthTransactionsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+        description: Query status
+      message:
+        type: string
+        example: ... Successfully
+        description: Query message
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+  Transaction:
+    type: object
+    properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+          description: Transaction ID
+        name:
+          type: string
+          example: Argent Bank Checking (x8349)
+          description: Transaction name
+        amount:
+          type: number
+          format: int64
+          example: 2082.79
+          description: Transaction amount
+        currency:
+          type: string
+          example: $
+          description: Transaction currency
+  TransactionID:
+    properties:
+      id:
+        type: string
+        description: Transaction ID
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+        description: Query status
+      message:
+        type: string
+        example: ... Successfully
+        description: Query message
+
