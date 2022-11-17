@@ -32,81 +32,17 @@ body {
   white-space: nowrap !important; /* 3 */
 }
 
-.form-button {
-  display: block;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-}
-
-.form-content {
-  box-sizing: border-box;
-  background-color: white;
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 3rem;
-  padding: 2rem;
-}
-
-.form-icon {
-  font-size: 5rem;
-}
-
-.input-remember {
-  display: flex;
-}
-
-.input-remember label {
-  margin-left: 0.25rem;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 1rem;
-}
-
-.input-wrapper label {
-  font-weight: bold;
-}
-
-.input-wrapper input {
-  padding: 5px;
-  font-size: 1.2rem;
-}
-
-/**************** Error control ****************/
-p[data-error] {
-  font-size: 0.8em;
-  font-weight: 600;
-  color: rgba(255, 0, 0, 0.587);
-}
-
-.input-wrapper[data-error]::after {
-  content: attr(data-error);
-  font-size: 0.8em;
-  font-weight: 600;
-  color: rgba(255, 0, 0, 0.587);
-  display: block;
-  margin-top: 7px;
-  margin-bottom: 7px;
-  text-align: left;
-  transition: 0.3s;
-}
-
-.input-wrapper[data-error-visible=true]::after {
-  opacity: 1;
-  margin-bottom: 5px;
-}
-
-.input-wrapper[data-error-visible=true] input {
-  border: 2px solid rgb(255, 0, 0);
-  border-radius: 3px;
+/******************* Global Flex ************************/
+/******************* Center of the page *******************/
+/******************* Margin *******************/
+/******************* Width and height *******************/
+/******************* Accessibility ************************/
+html {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
 .account {
@@ -154,11 +90,6 @@ p[data-error] {
   padding: 10px;
 }
 
-.header {
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
 .transaction-button {
   display: block;
   width: 100%;
@@ -182,14 +113,44 @@ p[data-error] {
     width: 200px;
   }
 }
-html {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/**************** 404 Error ****************/
+#error404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 auto;
+  color: rgb(201, 2, 2);
+  margin-top: -100px;
   text-align: center;
-  color: #2c3e50;
+}
+#error404 h1 {
+  font-size: 288px;
+  margin-bottom: 10px;
+}
+#error404 a {
+  margin-top: 100px;
+  margin-bottom: 40px;
+  text-decoration: none;
 }
 
+/**************** Responsive ****************/
+@media screen and (max-width: 768px) {
+  #error404 {
+    margin-top: 0px;
+    flex: 1 0 auto;
+  }
+  #error404 h1 {
+    font-size: 96px;
+    margin-bottom: 10px;
+  }
+  #error404 h2 {
+    font-size: 18px;
+  }
+  #error404 a {
+    font-size: 14px;
+    margin-top: 50px;
+  }
+}
 .footer {
   display: flex;
   justify-content: center;
@@ -234,6 +195,11 @@ html {
 .main-nav-logo-image {
   max-width: 100%;
   width: 200px;
+}
+
+.header {
+  color: #fff;
+  margin-bottom: 2rem;
 }
 
 .features {
@@ -313,6 +279,82 @@ html {
   .hero-content .text {
     font-size: 1.2rem;
   }
+}
+.form-button {
+  display: block;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.form-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+}
+
+.form-icon {
+  font-size: 5rem;
+}
+
+.input-remember {
+  display: flex;
+}
+
+.input-remember label {
+  margin-left: 0.25rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper label {
+  font-weight: bold;
+}
+
+.input-wrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+/**************** Error control ****************/
+p[data-error] {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: rgba(255, 0, 0, 0.587);
+}
+
+.input-wrapper[data-error]::after {
+  content: attr(data-error);
+  font-size: 0.8em;
+  font-weight: 600;
+  color: rgba(255, 0, 0, 0.587);
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.input-wrapper[data-error-visible=true]::after {
+  opacity: 1;
+  margin-bottom: 5px;
+}
+
+.input-wrapper[data-error-visible=true] input {
+  border: 2px solid rgb(255, 0, 0);
+  border-radius: 3px;
 }
 
 /*# sourceMappingURL=style.css.map */

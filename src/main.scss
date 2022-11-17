@@ -1,14 +1,15 @@
 // Base
 @import './sass/colors';
 @import './sass/base';
+@import './sass/mixins';
 @import './sass/typography';
 // Pages
-@import './pages/home/home';
-@import './pages/sign_in/signIn';
-@import './pages/user/user';
+@import './pages/profile/profile';
+@import './pages/error/error';
 // Static Components
 @import './components/static/footer/footer';
 @import './components/static/header/header';
 // components
 @import './components/features/features';
 @import './components/hero/hero';
+@import './components/forms/form';

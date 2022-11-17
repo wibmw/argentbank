@@ -2,7 +2,7 @@
 #error404 {
   @include flex-column-center;
   flex: 1 0 auto;
-  color: $primary-color;
+  color: $error-text;
   margin-top: -100px;
   text-align: center;
   // 404
@@ -14,14 +14,12 @@
   a {
     @include margin-tb(100px, 40px);
     text-decoration: none;
-    color: $primary-color;
   }
 }
+
 /**************** Responsive ****************/
 @media screen and (max-width: 768px) {
   #error404 {
-    @include flex-column-center;
-    color: $primary-color;
     margin-top: 0px;
     flex: 1 0 auto;
     h1 {

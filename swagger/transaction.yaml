@@ -17,6 +17,167 @@ basePath: /api/v1
 schemes:
   - http
 paths:
+
+  /user/profile/userAccounts:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Find user accounts
+      description: Return a list of the user accounts.
+      operationId: getUserAccounts
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Selected User Payload
+          required: true
+          schema:
+            $ref: '#/definitions/UserID'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User accounts retrieved successully
+          schema:
+            $ref: '#/definitions/UserAccountsResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/account:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Find the provided account
+      description: Return informations of the selected account.
+      operationId: findAccount
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Selected Account Payload
+          required: true
+          schema:
+            $ref: '#/definitions/AccountID'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Selected account retrieved successully
+          schema:
+            $ref: '#/definitions/Account'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/addAccount:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Create a new Account
+      description: Create a new Account with provided informations
+      operationId: createAccount
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Account Informations Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Account'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Account created successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/updateAccount:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Update Account
+      description: Update an account with provided informations
+      operationId: updateAccount
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Account Informations Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Account'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
+  /user/profile/deleteAccount:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Delete Account
+      description: Delete an account with provided informations
+      operationId: deleteAccount
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Selected Account Payload
+          required: true
+          schema:
+            $ref: '#/definitions/AccountID'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Account deleted successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid ID
+        '500':
+          description: Internal Server Error
   /user/profile/monthTransactions:
     post:
       security:
@@ -185,13 +346,66 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  MonthTransactions:
+  UserID:
     properties:
       id:
         type: string
         description: User id
+  UserAccountsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+        description: Query status
+      message:
+        type: string
+        example: ... Successfully
+        description: Query message
+      body:
+        type: array
+        items:
+          $ref: '#/definitions/Account'
+  AccountID:
+    properties:
+      id:
+        type: string
+        description: User id
+  Account:
+    type: object
+    properties:
+        id:
+          type: string
+          description: Account ID
+        userId:
+          type: string
+          description: User ID
+        name:
+          type: string
+          example: Argent Bank Checking (x8349)
+          description: Account name
+        balance:
+          type: number
+          format: int64
+          example: 2082.79
+          description: Account available balance
+        currency:
+          type: string
+          example: $
+          description: Account currency
+  TransactionID:
+    properties:
+      id:
+        type: string
+        description: Transaction ID
+  MonthTransactions:
+    properties:
+      id:
+        type: string
+        description: Account ID
       month:
         type: string
+        example: 2022-11
         description: Selected month (date String))
   MonthTransactionsResponse:
     type: object
@@ -212,28 +426,44 @@ definitions:
     type: object
     properties:
         id:
-          type: integer
-          format: int64
-          example: 10
-          description: Transaction ID
-        name:
           type: string
-          example: Argent Bank Checking (x8349)
-          description: Transaction name
+          description: Transaction ID
+        accountId:
+          type: string
+          description: Account ID
+        description:
+          type: string
+          example: Golden Sun Bakery
+          description: Transaction description
         amount:
           type: number
           format: int64
-          example: 2082.79
+          example: 20
           description: Transaction amount
         currency:
           type: string
           example: $
           description: Transaction currency
-  TransactionID:
-    properties:
-      id:
-        type: string
-        description: Transaction ID
+        type:
+          type: string
+          example: Electronic
+          description: Transaction type
+        category:
+          type: string
+          example: Food
+          description: Transaction category
+        note:
+          type: string
+          example: Breakfast 
+          description: Transaction note
+        created:
+          type: string
+          example: 2022-11-11T10:20:30Z
+          description: creation date
+        updated:
+          type: string
+          example: 2022-11-12T10:20:30Z
+          description: last update date
   ApiResponse:
     type: object
     properties:

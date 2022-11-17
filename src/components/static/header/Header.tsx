@@ -31,7 +31,7 @@ const Header = () => {
           <div>
             {token ? (
               <>
-                <Link to={'/user'} className='main-nav-item'>
+                <Link to={'/profile'} className='main-nav-item'>
                   <i className='fa fa-user-circle'></i>
                   {firstName}
                 </Link>
