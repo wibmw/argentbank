@@ -1,3 +1,11 @@
+/****************** HEADER ************************/
+
+.header {
+  color: $text-light-color;
+  margin-bottom: 2rem;
+}
+
+/****************** Main Nav ************************/
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -33,7 +41,3 @@
   }
 }
 
-.header {
-  color: $text-light-color;
-  margin-bottom: 2rem;
-}

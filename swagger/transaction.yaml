@@ -349,7 +349,7 @@ definitions:
   UserID:
     properties:
       id:
-        type: string
+        type: number
         description: User id
   UserAccountsResponse:
     type: object
@@ -369,16 +369,16 @@ definitions:
   AccountID:
     properties:
       id:
-        type: string
+        type: number
         description: User id
   Account:
     type: object
     properties:
         id:
-          type: string
+          type: number
           description: Account ID
         userId:
-          type: string
+          type: number
           description: User ID
         name:
           type: string
@@ -396,12 +396,12 @@ definitions:
   TransactionID:
     properties:
       id:
-        type: string
+        type: number
         description: Transaction ID
   MonthTransactions:
     properties:
       id:
-        type: string
+        type: number
         description: Account ID
       month:
         type: string
@@ -426,10 +426,10 @@ definitions:
     type: object
     properties:
         id:
-          type: string
+          type: number
           description: Transaction ID
         accountId:
-          type: string
+          type: number
           description: Account ID
         description:
           type: string
@@ -456,11 +456,11 @@ definitions:
           type: string
           example: Breakfast 
           description: Transaction note
-        created:
+        createdAt:
           type: string
           example: 2022-11-11T10:20:30Z
           description: creation date
-        updated:
+        updatedAt:
           type: string
           example: 2022-11-12T10:20:30Z
           description: last update date

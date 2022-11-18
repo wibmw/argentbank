@@ -10,22 +10,26 @@ const SignIn = () => {
   const dispatch = useAppDispatch(),
     checkbox = useRef(null),
     navigate = useNavigate(),
-    token = getLocalToken(), // useTypedSelector((state) => state.auth),
+    token = getLocalToken(),
+    // Get token info
     [login, { data, status, error, isSuccess, isError }] = useLoginMutation()
 
+  // If connected, navigate to the profile page
   if (token) navigate('/profile')
 
   if (isSuccess) {
-    console.log('success')
+    // If success get token
     const tokenResponse = data['body']['token']
     dispatch(setToken({ token: tokenResponse }))
     setLocalToken(tokenResponse, checkbox.current.checked)
     navigate('/profile')
   } else if (isError) {
+    // Else show error message in console
     console.log(status)
     console.log(error)
   }
 
+  // Check and stock  form's data
   const formState = useTypedSelector((state) => state.auth.credentialsForm),
     isValid = () => {
       return formState && formState.isEmailValid && formState.isPasswordValid
@@ -42,11 +46,13 @@ const SignIn = () => {
           <i className='fa fa-user-circle form-icon'></i>
           <h1>Sign In</h1>
           <form>
+            {/** *********** Form ******************/}
             <Credentials />
             <div className='input-remember'>
               <input ref={checkbox} type='checkbox' id='remember-me' />
               <label htmlFor='remember-me'>Remember me</label>
             </div>
+            {/** *********** Button ******************/}
             <div
               className='form-button'
               onClick={async () => {
@@ -55,8 +61,10 @@ const SignIn = () => {
             >
               Sign In
             </div>
+            {/** *********** Error ******************/}
             {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
             <br />
+            {/** *********** Navigate to new account page ******************/}
             <Link to={'/sign-up'}>Create a new account</Link>
           </form>
         </section>

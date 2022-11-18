@@ -9,10 +9,10 @@ import Cookies from 'universal-cookie'
 const Header = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
-    { firstName } = useTypedSelector((state) => state.auth),
     token = getLocalToken(),
-    cookie = new Cookies()
-  // console.log(token)
+    cookie = new Cookies(),
+    { firstName } = useTypedSelector((state) => state.auth)
+  // Logout function
   const logout = () => {
     dispatch(setToken({ token: null }))
     cookie.remove('token', { path: '/' })
@@ -23,6 +23,7 @@ const Header = () => {
     <React.Fragment>
       {/** *********** Header Section ******************/}
       <header id=''>
+        {/** *********** Nav Section ******************/}
         <nav className='main-nav'>
           <Link to={'/'} className='main-nav-logo'>
             <img className='main-nav-logo-image' src={argentBankLogo} alt='Argent Bank Logo' />
@@ -30,6 +31,7 @@ const Header = () => {
           </Link>
           <div>
             {token ? (
+              // If token, show connected Nav
               <>
                 <Link to={'/profile'} className='main-nav-item'>
                   <i className='fa fa-user-circle'></i>
@@ -41,6 +43,7 @@ const Header = () => {
                 </Link>
               </>
             ) : (
+              // Else show signIn Nav
               <>
                 <Link to={'/sign-in'} className='main-nav-item'>
                   <i className='fa fa-user-circle'></i>

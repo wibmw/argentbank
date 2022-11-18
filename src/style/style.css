@@ -1,4 +1,4 @@
-/******************* COLORS ************************/
+/******************* COLORS ************************/ /******************* BASE ************************/
 @import url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 body {
   margin: 0;
@@ -45,74 +45,6 @@ html {
   color: #2c3e50;
 }
 
-.account {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid black;
-  background-color: #fff;
-  width: 80%;
-  margin: 0 auto;
-  flex-direction: column;
-  padding: 1.5rem;
-  box-sizing: border-box;
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-.account-amount {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
-}
-
-.account-amount-description {
-  margin: 0;
-}
-
-.account-title {
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-  font-weight: normal;
-}
-
-.account-content-wrapper {
-  width: 100%;
-  flex: 1;
-}
-
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
-}
-
-.transaction-button {
-  display: block;
-  width: 100%;
-  padding: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
-}
-
-@media (min-width: 720px) {
-  .account {
-    flex-direction: row;
-  }
-  .account-content-wrapper.cta {
-    flex: 0;
-  }
-  .transaction-button {
-    width: 200px;
-  }
-}
 /**************** 404 Error ****************/
 #error404 {
   display: flex;
@@ -151,6 +83,7 @@ html {
     margin-top: 50px;
   }
 }
+/****************** FOOTER ************************/
 .footer {
   display: flex;
   justify-content: center;
@@ -163,6 +96,13 @@ html {
   padding: 0;
 }
 
+/****************** HEADER ************************/
+.header {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+/****************** Main Nav ************************/
 .main-nav {
   display: flex;
   justify-content: space-between;
@@ -197,11 +137,7 @@ html {
   width: 200px;
 }
 
-.header {
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
+/******************* FEATURES ************************/
 .features {
   display: flex;
   flex-direction: column;
@@ -212,6 +148,7 @@ html {
     flex-direction: row;
   }
 }
+/******************* Icon ************************/
 .feature-icon {
   width: 100px;
   border: 10px solid #00bc77;
@@ -219,11 +156,13 @@ html {
   padding: 1rem;
 }
 
+/******************* Item ************************/
 .feature-item {
   flex: 1;
   padding: 2.5rem;
 }
 
+/******************* Title ************************/
 .feature-item-title {
   color: #222;
   font-size: 1.25rem;
@@ -231,6 +170,82 @@ html {
   margin-bottom: 0.5rem;
 }
 
+/****************** ACCOUNT ************************/
+.account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+/****************** Amount ************************/
+.account-amount {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/****************** Description ************************/
+.account-amount-description {
+  margin: 0;
+}
+
+/****************** Title ************************/
+.account-title {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+/****************** Wrapper ************************/
+.account-content-wrapper {
+  width: 100%;
+  flex: 1;
+}
+
+/****************** Buttons ************************/
+.edit-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.transaction-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+/****************** Media Query ************************/
+@media (min-width: 720px) {
+  .account {
+    flex-direction: row;
+  }
+  .account-content-wrapper.cta {
+    flex: 0;
+  }
+  .transaction-button {
+    width: 200px;
+  }
+}
+/****************** HERO ************************/
 .hero {
   background-image: url("../assets/img/bank-tree.jpeg");
   background-position: 0 -50px;
@@ -240,6 +255,7 @@ html {
   position: relative;
 }
 
+/****************** Content ************************/
 .hero-content {
   position: relative;
   top: 2rem;
@@ -249,18 +265,17 @@ html {
   text-align: left;
   margin: 0 auto;
 }
-
 .hero-content .subtitle {
   font-weight: bold;
   font-size: 1rem;
   margin: 0;
 }
-
 .hero-content .text {
   margin-bottom: 0;
   font-size: 0.9rem;
 }
 
+/****************** Media Query ************************/
 @media (min-width: 920px) {
   .hero {
     height: 400px;
@@ -280,6 +295,8 @@ html {
     font-size: 1.2rem;
   }
 }
+/****************** FORMS ************************/
+/****************** Button ************************/
 .form-button {
   display: block;
   padding: 8px;
@@ -291,6 +308,7 @@ html {
   color: #fff;
 }
 
+/****************** Content ************************/
 .form-content {
   box-sizing: border-box;
   background-color: white;
@@ -300,29 +318,29 @@ html {
   padding: 2rem;
 }
 
+/****************** Icon ************************/
 .form-icon {
   font-size: 5rem;
 }
 
+/****************** Checkbox remember me ************************/
 .input-remember {
   display: flex;
 }
-
 .input-remember label {
   margin-left: 0.25rem;
 }
 
+/****************** Form ************************/
 .input-wrapper {
   display: flex;
   flex-direction: column;
   text-align: left;
   margin-bottom: 1rem;
 }
-
 .input-wrapper label {
   font-weight: bold;
 }
-
 .input-wrapper input {
   padding: 5px;
   font-size: 1.2rem;

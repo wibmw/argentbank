@@ -6,7 +6,7 @@ import { setFirstName } from '../../redux/slices/auth.slice'
 import { allAccounts, getLocalToken } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
 
-const Profile = () => {
+const Transactions = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
     { state } = useLocation(),
@@ -69,4 +69,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Transactions

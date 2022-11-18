@@ -8,6 +8,7 @@ import Footer from './components/static/footer/Footer'
 import Profile from './pages/profile/Profile'
 import User from './pages/user/User'
 import SignUp from './pages/sign_up/SignUp'
+import Transactions from './pages/transactions/Transactions'
 
 const App = () => {
   return (
@@ -24,10 +25,12 @@ const App = () => {
           <Route path={'/sign-in'} element={<SignIn />} />
           {/** *********** Sign Up Page ******************/}
           <Route path={'/sign-up'} element={<SignUp />} />
-          {/** *********** Profile Page ******************/}
+          {/** *********** User Page ******************/}
           <Route path={'/user'} element={<User />} />
-          {/** *********** Profile Page ******************/}
+          {/** *********** Accounts Page ******************/}
           <Route path={'/profile'} element={<Profile />} />
+          {/** *********** Transactions Page ******************/}
+          <Route path={'/transactions'} element={<Transactions />} />
         </Routes>
         <Footer />
       </Router>

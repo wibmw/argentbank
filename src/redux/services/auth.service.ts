@@ -1,46 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { getLocalToken } from '../../utils/localDatas'
 
-export interface Token {
-  token: string
-}
-
-export interface ProfileCredentials {
-  email: string
-  password: string
-  isEmailValid?: boolean
-  isPasswordValid?: boolean
-}
-
-export interface ProfileDatas {
-  email: string
-  firstName: string
-  lastName: string
-  createdAt: string
-  updatedAt: string
-  id: string
-}
-
-export interface ProfileNames {
-  firstName: string | null
-  lastName: string | null
-  isFirstNameValid?: boolean
-  isLastNameValid?: boolean
-}
-
-export interface SignupRequest {
-  firstName: string | null
-  lastName: string | null
-  email: string
-  password: string
-}
-
-export interface SignupResponse {
-  email: string
-  id: string
-}
-
-export const api = createApi({
+// Auth User API
+export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3001/api/v1/user/',
     prepareHeaders: (headers) => {
@@ -52,6 +14,7 @@ export const api = createApi({
       return headers
     },
   }),
+  // Login --> Return the auth token
   endpoints: (builder) => ({
     login: builder.mutation<Token, ProfileCredentials>({
       query: (credentials) => ({
@@ -60,6 +23,7 @@ export const api = createApi({
         body: credentials,
       }),
     }),
+    // Profile --> Return the user profile
     profile: builder.mutation<ProfileDatas, void>({
       query: () => {
         return {
@@ -68,6 +32,7 @@ export const api = createApi({
         }
       },
     }),
+    // SignUp --> Register a new user
     signup: builder.mutation<SignupResponse, SignupRequest>({
       query: (accountInfos) => {
         return {
@@ -77,6 +42,7 @@ export const api = createApi({
         }
       },
     }),
+    // updateProfile --> Update user names
     updateProfile: builder.mutation<void, ProfileNames>({
       query: (namesForm) => {
         return {
@@ -89,4 +55,44 @@ export const api = createApi({
   }),
 })
 
-export const { useLoginMutation, useProfileMutation, useUpdateProfileMutation, useSignupMutation } = api
+// Token Interface
+export interface Token {
+  token: string
+}
+// User Credentials Interface
+export interface ProfileCredentials {
+  email: string
+  password: string
+  isEmailValid?: boolean
+  isPasswordValid?: boolean
+}
+// User Profile Data Interface
+export interface ProfileDatas {
+  email: string
+  firstName: string
+  lastName: string
+  createdAt: string
+  updatedAt: string
+  id: string
+}
+// User Names Interface
+export interface ProfileNames {
+  firstName: string | null
+  lastName: string | null
+  isFirstNameValid?: boolean
+  isLastNameValid?: boolean
+}
+// Data to SignUp Interface
+export interface SignupRequest {
+  firstName: string | null
+  lastName: string | null
+  email: string
+  password: string
+}
+// SignUp Response Interface
+export interface SignupResponse {
+  email: string
+  id: string
+}
+
+export const { useLoginMutation, useProfileMutation, useUpdateProfileMutation, useSignupMutation } = authApi

@@ -1,0 +1,77 @@
+/****************** ACCOUNT ************************/
+.account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+/****************** Amount ************************/
+.account-amount {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/****************** Description ************************/
+.account-amount-description {
+  margin: 0;
+}
+
+/****************** Title ************************/
+.account-title {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+/****************** Wrapper ************************/
+.account-content-wrapper {
+  width: 100%;
+  flex: 1;
+}
+
+/****************** Buttons ************************/
+.edit-button {
+  border-color: $primary-color;
+  background-color: $primary-color;
+  color: $text-light-color;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.transaction-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: $primary-color;
+  background-color: $primary-color;
+  color: $text-light-color;
+}
+
+/****************** Media Query ************************/
+@media (min-width: 720px) {
+  .account {
+    flex-direction: row;
+  }
+
+  .account-content-wrapper.cta {
+    flex: 0;
+  }
+
+  .transaction-button {
+    width: 200px;
+  }
+}

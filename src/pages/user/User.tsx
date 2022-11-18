@@ -7,12 +7,16 @@ import { getLocalToken } from '../../utils/localDatas'
 
 const User = () => {
   const token = getLocalToken(),
+    // Update User info
     [updateProfile, { status, error, isSuccess, isError }] = useUpdateProfileMutation(),
     navigate = useNavigate()
 
+  // If not connected, navigate to the signIn page
   if (!token) navigate('/sign-in')
 
+  // If success navigate to profile page
   if (isSuccess) navigate('/profile')
+  // Else show error message in console
   else if (isError) {
     console.log(status)
     if ((error as any).data.message === 'User not Verified') {
@@ -22,9 +26,11 @@ const User = () => {
   }
 
   const formState = useTypedSelector((state) => state.auth.namesForm),
+    // Check form's data
     isValid = () => {
       return formState && formState.isFirstNameValid && formState.isLastNameValid
     },
+    // if datas are valid, update datas
     update = () => {
       if (isValid()) updateProfile(formState)
     }
@@ -37,7 +43,9 @@ const User = () => {
           <i className='fa fa-user-circle form-icon'></i>
           <h1>Profile</h1>
           <form>
+            {/** *********** Form ******************/}
             <Names />
+            {/** *********** Button ******************/}
             <div
               className='form-button'
               onClick={async () => {
@@ -46,6 +54,7 @@ const User = () => {
             >
               Update your profile
             </div>
+            {/** *********** Error ******************/}
             {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
           </form>
         </section>

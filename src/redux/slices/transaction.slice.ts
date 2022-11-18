@@ -10,7 +10,7 @@ const initialValues: Auth = {
 }
 
 // User Slices
-const authSlice = createSlice({
+const slice = createSlice({
   name: 'auth',
   initialState: initialValues,
 
@@ -48,5 +48,5 @@ type Auth = {
 }
 
 // export const setToken = (state: RootState) => state.auth.token // slice.actions
-export const { setToken, setFirstName, setNamesForm, setCredentialsForm } = authSlice.actions
-export default authSlice.reducer
+export const { setToken, setFirstName, setNamesForm, setCredentialsForm } = slice.actions
+export default slice.reducer

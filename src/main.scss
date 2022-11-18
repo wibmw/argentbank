@@ -4,12 +4,13 @@
 @import './sass/mixins';
 @import './sass/typography';
 // Pages
-@import './pages/profile/profile';
-@import './pages/error/error';
+@import './pages/error/style';
+@import './pages/transactions/style';
 // Static Components
-@import './components/static/footer/footer';
-@import './components/static/header/header';
+@import './components/static/footer/style';
+@import './components/static/header/style';
 // components
-@import './components/features/features';
-@import './components/hero/hero';
-@import './components/forms/form';
+@import './components/features/style';
+@import './components/account/style';
+@import './components/hero/style';
+@import './components/forms/style';

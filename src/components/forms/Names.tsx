@@ -6,12 +6,14 @@ import { namesCheck } from '../../utils/formValidation'
 
 const Names = () => {
   const dispatch = useAppDispatch(),
+    // Names Form datas
     [namesFormState, setFormState] = useState<ProfileNames>({
       firstName: '',
       lastName: '',
       isFirstNameValid: false,
       isLastNameValid: false,
     }),
+    // Onchange, check and stock form datas in useState
     handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
       const name = target.name.includes('first') ? 'isFirstNameValid' : 'isLastNameValid'
       setFormState((prev) => ({ ...prev, [target.name]: target.value, [name]: namesCheck(target) }))

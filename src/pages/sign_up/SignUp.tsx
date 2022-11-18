@@ -11,9 +11,12 @@ const SignUp = () => {
     navigate = useNavigate(),
     token = getLocalToken()
 
+  // If connected, navigate to the profile page
   if (token) navigate('/profile')
 
+  // If success navigate to signIn page
   if (isSuccess) navigate('/sign-in')
+  // Else show error message in console
   else if (isError) {
     console.log(status)
     console.log(error)
@@ -22,6 +25,7 @@ const SignUp = () => {
   let formState: SignupRequest
   const { firstName, lastName, isFirstNameValid, isLastNameValid } = useTypedSelector((state) => state.auth.namesForm),
     { email, password, isEmailValid, isPasswordValid } = useTypedSelector((state) => state.auth.credentialsForm),
+    // Check and stock form's data
     checkAccountInfos = () => {
       const isValid = isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid
       if (isValid)
@@ -33,6 +37,7 @@ const SignUp = () => {
         }
       return isValid
     },
+    // if datas are valid, signUp
     createAccount = () => {
       if (checkAccountInfos()) signUp(formState)
     }
@@ -45,8 +50,10 @@ const SignUp = () => {
           <i className='fa fa-user-circle form-icon'></i>
           <h1>Sign Up</h1>
           <form>
+            {/** *********** Form ******************/}
             <Names />
             <Credentials />
+            {/** *********** Button ******************/}
             <div
               className='form-button'
               onClick={async () => {
@@ -55,6 +62,7 @@ const SignUp = () => {
             >
               Create your account
             </div>
+            {/** *********** Error ******************/}
             {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
           </form>
         </section>

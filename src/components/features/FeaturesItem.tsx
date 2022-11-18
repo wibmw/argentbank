@@ -4,19 +4,20 @@ import moneyIcon from '../../assets/img/icon-money.png'
 import securityIcon from '../../assets/img/icon-security.png'
 
 const FeaturesItem = (props: { title: string; content: string; imgName: string }) => {
-  const { title, content, imgName } = props
-  const icon = () => {
-    switch (imgName) {
-      case 'Cat':
-        return catIcon
-      case 'Money':
-        return moneyIcon
-      case 'Security':
-        return securityIcon
-      default:
-        return catIcon
+  const { title, content, imgName } = props,
+    // Icon Selection
+    icon = () => {
+      switch (imgName) {
+        case 'Cat':
+          return catIcon
+        case 'Money':
+          return moneyIcon
+        case 'Security':
+          return securityIcon
+        default:
+          return catIcon
+      }
     }
-  }
 
   return (
     <React.Fragment>

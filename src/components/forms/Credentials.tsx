@@ -6,12 +6,14 @@ import { emailCheck, passwordCheck } from '../../utils/formValidation'
 
 const Credentials = () => {
   const dispatch = useAppDispatch(),
+    // Credentials Form datas
     [credentialsFormState, setFormState] = useState<ProfileCredentials>({
       email: '',
       password: '',
       isEmailValid: false,
       isPasswordValid: false,
     }),
+    // Onchange, check and stock form datas in useState
     handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
       const name = target.name.includes('email') ? 'isEmailValid' : 'isPasswordValid'
       const isValid = target.name.includes('email') ? emailCheck(target) : passwordCheck(target)
