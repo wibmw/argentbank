@@ -1,70 +1,69 @@
 import React, { useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '../../redux/hooks/store'
+import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { useProfileMutation } from '../../redux/services/auth.service'
 import { setFirstName } from '../../redux/slices/auth.slice'
-import { allAccounts, getLocalToken } from '../../utils/localDatas'
+import { allAccounts, allTransactions, getLocalToken } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
+import Transaction from '../../components/transaction/Transaction'
+import { IAccount } from '../../redux/services/transaction.service'
 
 const Transactions = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
-    { state } = useLocation(),
     token = getLocalToken(),
-    // Get profile Info
-    [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
+    { accountId } = useTypedSelector((state) => state.auth),
+    selectedAccount: IAccount | undefined = allAccounts.find((account) => account.id === accountId)
 
+  let newBalance = selectedAccount.balance
+  console.log(newBalance)
   // If not connected, navigate to the signIn page
   if (!token) navigate('/sign-in')
-
-  let firstName, lastName
-
-  useEffect(() => {
-    profile()
-  }, [profile, state])
-
-  if (isSuccess) {
-    // If success get datas
-    ;({ firstName, lastName } = data['body'])
-    dispatch(setFirstName({ firstName: firstName }))
-  } else if (isError) {
-    // Else show error message in console
-    console.log(status)
-    if ((error as any).data.message === 'User not Verified') {
-      console.log('User not Verified')
-    }
-    console.log(error)
-  }
 
   return (
     <React.Fragment>
       {/** *********** Profile Page ******************/}
-      <main className='main bg-dark'>
+      <section className='main bg-dark'>
         <div className='header'>
-          <h1>
-            Welcome back
-            <br />
-            {/** *********** Display name ******************/}
-            {firstName + ' ' + lastName + ' !'}
-          </h1>
-          <Link to={'/user'}>
-            {/** ***********  Edit Button  ******************/}
-            <button className='edit-button'>Edit Name</button>
-          </Link>
+          {/** *********** Account ******************/}
+          {selectedAccount && (
+            <Account
+              id={selectedAccount.id}
+              name={selectedAccount.name}
+              balance={selectedAccount.balance}
+              currency={selectedAccount.currency}
+              description={selectedAccount.description}
+              accountPage={false}
+            ></Account>
+          )}
         </div>
-        <h2 className='sr-only'>Accounts</h2>
-        {/** *********** Display Accounts ******************/}
-        {allAccounts.map((transaction, index) => (
-          <Account
-            key={transaction.id + '-' + index}
-            id={transaction.id}
-            name={transaction.name}
-            balance={transaction.balance}
-            currency={transaction.currency}
-            description={transaction.description}
-          ></Account>
-        ))}
-      </main>
+        {/** ***********  Transactions Table  ******************/}
+        <main className='transactions_table'>
+          <header className='table_header'>
+            <th className='col-1'>DATE</th>
+            <th className='col-2'>DESCRIPTION</th>
+            <th className='col-3'>AMOUNT</th>
+            <th className='col-4'>BALANCE</th>
+          </header>
+          <div className='table_wrapper'>
+            {/** *********** Transactions details ******************/}
+            {/**  date, amount, currency, description, balance, type, category, note */}
+            {allTransactions.map((transaction, index) => {
+              if(transaction.accountId == accountId)newBalance -= transaction.amount
+              console.log(newBalance)
+              return (
+                transaction.accountId == accountId && (
+                  <Transaction
+                    key={transaction.id + '-' + index}
+                    transaction={transaction}
+                    balance={newBalance}
+                  ></Transaction>
+                )
+              )
+            })}
+          </div>
+        </main>
+      </section>
     </React.Fragment>
   )
 }

@@ -54,14 +54,15 @@ const Profile = () => {
         </div>
         <h2 className='sr-only'>Accounts</h2>
         {/** *********** Display Accounts ******************/}
-        {allAccounts.map((transaction, index) => (
+        {allAccounts.map((account, index) => (
           <Account
-            key={transaction.id + '-' + index}
-            id={transaction.id}
-            name={transaction.name}
-            balance={transaction.balance}
-            currency={transaction.currency}
-            description={transaction.description}
+            key={account.id + '-' + index}
+            id={account.id}
+            name={account.name}
+            balance={account.balance}
+            currency={account.currency}
+            description={account.description}
+            accountPage={true}
           ></Account>
         ))}
       </main>

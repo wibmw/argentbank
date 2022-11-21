@@ -88,5 +88,14 @@ interface ITransaction {
 }
 
 type ITransactionId = {
-  id: string
+  id: number
+}
+
+export interface IAccount {
+  id: number
+  userId: number
+  name: string
+  balance: number
+  currency: string
+  description: string
 }

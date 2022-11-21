@@ -7,6 +7,7 @@ const initialValues: Auth = {
   firstName: null,
   namesForm: null,
   credentialsForm: null,
+  accountId: null,
 }
 
 // User Slices
@@ -33,6 +34,9 @@ const authSlice = createSlice({
     setCredentialsForm: (state, action: PayloadAction<{ credentialsForm: ProfileCredentials }>) => {
       state.credentialsForm = action.payload.credentialsForm
     },
+    setActiveAccount: (state, action: PayloadAction<{ id: number }>) => {
+      state.accountId = action.payload.id
+    },
     defaultState: (state) => {
       state = initialValues
     },
@@ -45,8 +49,9 @@ type Auth = {
   firstName: string | null
   namesForm: ProfileNames | null
   credentialsForm: ProfileCredentials | null
+  accountId: number | null
 }
 
 // export const setToken = (state: RootState) => state.auth.token // slice.actions
-export const { setToken, setFirstName, setNamesForm, setCredentialsForm } = authSlice.actions
+export const { setToken, setFirstName, setNamesForm, setCredentialsForm, setActiveAccount } = authSlice.actions
 export default authSlice.reducer

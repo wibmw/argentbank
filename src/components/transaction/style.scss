@@ -1,18 +1,54 @@
 // chevron initial position
 .transaction {
-  &_top_wrapper {
+  &::before {
+    display: inline-block;
+    content: '';
+    border-top: 0.2rem solid #ccc;
+    width: 100%;
   }
-
-  &_bottom_wrapper {
+  &:first-of-type::before {
+    display: none;
+  }
+  &_wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 10px;
+    padding: 20px 0;
+    font-weight: 600;
+    &_top {
+      display: flex;
+      justify-content: space-around;
+    }
+    &_bottom {
+      grid-area: 2 / 1 / 3 / 5;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      grid-row-gap: 15px;
+      margin-top: 20px;
+    }
   }
 }
 
-.unrotate-chevron {
-  transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
+.chevron {
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+  width: 25px;
+  height: 15px;
+  &-unrotate {
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+  }
+  &-rotate {
+    transform: rotate(-180deg);
+    transition: 0.5s ease-in-out;
+  }
 }
-// chevron rotation
-.rotate-chevron {
-  transform: rotate(-180deg);
-  transition: 0.5s ease-in-out;
+
+.pen {
+  width: 15px;
+  height: 15px;
+  fill: rgb(124, 124, 124);
 }
