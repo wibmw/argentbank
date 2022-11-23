@@ -16,7 +16,6 @@ const Transactions = () => {
     selectedAccount: IAccount | undefined = allAccounts.find((account) => account.id === accountId)
 
   let newBalance = selectedAccount.balance
-  console.log(newBalance)
   // If not connected, navigate to the signIn page
   if (!token) navigate('/sign-in')
 
@@ -49,8 +48,7 @@ const Transactions = () => {
             {/** *********** Transactions details ******************/}
             {/**  date, amount, currency, description, balance, type, category, note */}
             {allTransactions.map((transaction, index) => {
-              if(transaction.accountId == accountId)newBalance -= transaction.amount
-              console.log(newBalance)
+              if (transaction.accountId == accountId) newBalance -= transaction.amount
               return (
                 transaction.accountId == accountId && (
                   <Transaction

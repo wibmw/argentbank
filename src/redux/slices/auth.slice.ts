@@ -4,10 +4,10 @@ import { ProfileCredentials, ProfileNames } from '../services/auth.service'
 // Initiate all state values
 const initialValues: Auth = {
   token: null,
-  firstName: null,
-  namesForm: null,
-  credentialsForm: null,
-  accountId: null,
+  firstName: '',
+  namesForm: { firstName: '', lastName: '' },
+  credentialsForm: { email: '', password: '' },
+  accountId: 0,
 }
 
 // User Slices
