@@ -11,13 +11,11 @@ import { IAccount } from '../../redux/services/transaction.service'
 const Transactions = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
-    token = getLocalToken(),
     { accountId } = useTypedSelector((state) => state.auth),
     selectedAccount: IAccount | undefined = allAccounts.find((account) => account.id === accountId)
 
   let newBalance = selectedAccount.balance
-  // If not connected, navigate to the signIn page
-  if (!token) navigate('/sign-in')
+
 
   return (
     <React.Fragment>
@@ -38,12 +36,12 @@ const Transactions = () => {
         </div>
         {/** ***********  Transactions Table  ******************/}
         <main className='transactions_table'>
-          <header className='table_header'>
-            <th className='col-1'>DATE</th>
-            <th className='col-2'>DESCRIPTION</th>
-            <th className='col-3'>AMOUNT</th>
-            <th className='col-4'>BALANCE</th>
-          </header>
+          <div className='table_header'>
+            <span className='col-1'>DATE</span>
+            <span className='col-2'>DESCRIPTION</span>
+            <span className='col-3'>AMOUNT</span>
+            <span className='col-4'>BALANCE</span>
+          </div>
           <div className='table_wrapper'>
             {/** *********** Transactions details ******************/}
             {/**  date, amount, currency, description, balance, type, category, note */}

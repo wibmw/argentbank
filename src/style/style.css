@@ -2,6 +2,7 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.4.2/css/all.min.css);
 body {
   margin: 0;
+  min-width: 768px;
 }
 
 #root {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import argentBankLogo from '../../../assets/img/argentBankLogo.png'
 import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
@@ -9,9 +9,10 @@ import Cookies from 'universal-cookie'
 const Header = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
-    token = getLocalToken(),
     cookie = new Cookies(),
-    { firstName } = useTypedSelector((state) => state.auth)
+    { firstName } = useTypedSelector((state) => state.auth),
+    token = getLocalToken()
+
   // Logout function
   const logout = () => {
     dispatch(setToken({ token: null }))
@@ -34,11 +35,11 @@ const Header = () => {
               // If token, show connected Nav
               <>
                 <Link to={'/profile'} className='main-nav-item'>
-                  <i className='fa fa-user-circle'></i>
+                  <i className='fas fa-user-circle'></i>
                   {firstName}
                 </Link>
                 <Link to={'/'} className='main-nav-item' onClick={logout}>
-                  <i className='fa fa-sign-out'></i>
+                  <i className='fas fa-sign-out'></i>
                   Sign Out
                 </Link>
               </>
@@ -46,7 +47,7 @@ const Header = () => {
               // Else show signIn Nav
               <>
                 <Link to={'/sign-in'} className='main-nav-item'>
-                  <i className='fa fa-user-circle'></i>
+                  <i className='fas fa-user-circle'></i>
                   Sign In
                 </Link>
               </>

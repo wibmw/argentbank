@@ -5,6 +5,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from 'redux-persist'
+import thunk from 'redux-thunk'
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +20,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     auth: persistedReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
+  middleware: [thunk]// ,(getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
 })
 
 // Store type

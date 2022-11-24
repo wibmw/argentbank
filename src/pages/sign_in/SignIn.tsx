@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Credentials from '../../components/forms/Credentials'
 import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
@@ -14,20 +14,23 @@ const SignIn = () => {
     // Get token info
     [login, { data, status, error, isSuccess, isError }] = useLoginMutation()
 
-  // If connected, navigate to the profile page
-  if (token) navigate('/profile')
+  useEffect(() => {
+    // If connected, navigate to the profile page
+    if (token) navigate('/profile')
 
-  if (isSuccess) {
-    // If success get token
-    const tokenResponse = data['body']['token']
-    dispatch(setToken({ token: tokenResponse }))
-    setLocalToken(tokenResponse, checkbox.current.checked)
-    navigate('/profile')
-  } else if (isError) {
-    // Else show error message in console
-    console.log(status)
-    console.log(error)
-  }
+    if (isSuccess) {
+      // If success get token
+      const tokenResponse = data['body']['token']
+      dispatch(setToken({ token: tokenResponse }))
+      setLocalToken(tokenResponse, checkbox.current.checked)
+
+      navigate('/profile')
+    } else if (isError) {
+      // Else show error message in console
+      console.log(status)
+      console.log(error)
+    }
+  }, [token, isSuccess, isError])
 
   // Check and stock  form's data
   const formState = useTypedSelector((state) => state.auth.credentialsForm),

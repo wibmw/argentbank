@@ -9,6 +9,7 @@ import Profile from './pages/profile/Profile'
 import User from './pages/user/User'
 import SignUp from './pages/sign_up/SignUp'
 import Transactions from './pages/transactions/Transactions'
+import AuthLayout from './components/authLayout/AuthLayout'
 
 const App = () => {
   return (
@@ -25,12 +26,15 @@ const App = () => {
           <Route path={'/sign-in'} element={<SignIn />} />
           {/** *********** Sign Up Page ******************/}
           <Route path={'/sign-up'} element={<SignUp />} />
-          {/** *********** User Page ******************/}
-          <Route path={'/user'} element={<User />} />
-          {/** *********** Accounts Page ******************/}
-          <Route path={'/profile'} element={<Profile />} />
-          {/** *********** Transactions Page ******************/}
-          <Route path={'/transactions'} element={<Transactions />} />
+
+          <Route element={<AuthLayout />}>
+            {/** *********** User Page ******************/}
+            <Route path={'/user'} element={<User />} />
+            {/** *********** Accounts Page ******************/}
+            <Route path={'/profile'} element={<Profile />} />
+            {/** *********** Transactions Page ******************/}
+            <Route path={'/transactions'} element={<Transactions />} />
+          </Route>
         </Routes>
         <Footer />
       </Router>

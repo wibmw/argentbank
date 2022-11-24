@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Credentials from '../../components/forms/Credentials'
 import Names from '../../components/forms/Names'
@@ -9,18 +9,22 @@ import { getLocalToken } from '../../utils/localDatas'
 const SignUp = () => {
   const [signUp, { status, error, isSuccess, isError }] = useSignupMutation(),
     navigate = useNavigate(),
-    token = getLocalToken()
+    [token, setLocalToken] = useState()
 
-  // If connected, navigate to the profile page
-  if (token) navigate('/profile')
+  useEffect(() => {
+    setLocalToken(getLocalToken())
 
-  // If success navigate to signIn page
-  if (isSuccess) navigate('/sign-in')
-  // Else show error message in console
-  else if (isError) {
-    console.log(status)
-    console.log(error)
-  }
+    // If connected, navigate to the profile page
+    if (token) navigate('/profile')
+
+    // If success navigate to signIn page
+    if (isSuccess) navigate('/sign-in')
+    // Else show error message in console
+    else if (isError) {
+      console.log(status)
+      console.log(error)
+    }
+  }, [token, isSuccess, isError])
 
   let formState: SignupRequest
   const { firstName, lastName, isFirstNameValid, isLastNameValid } = useTypedSelector((state) => state.auth.namesForm),

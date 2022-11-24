@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/hooks/store'
 import { useProfileMutation } from '../../redux/services/auth.service'
@@ -10,12 +10,8 @@ const Profile = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
     { state } = useLocation(),
-    token = getLocalToken(),
     // Get profile Info
     [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
-
-  // If not connected, navigate to the signIn page
-  if (!token) navigate('/sign-in')
 
   let firstName, lastName
 
