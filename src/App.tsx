@@ -3,7 +3,6 @@ import Header from './components/static/header/Header'
 import Home from './pages/home/Home'
 import Error from './pages/error/Error'
 import SignIn from './pages/sign_in/SignIn'
-
 import Footer from './components/static/footer/Footer'
 import Profile from './pages/profile/Profile'
 import User from './pages/user/User'
@@ -26,7 +25,7 @@ const App = () => {
           <Route path={'/sign-in'} element={<SignIn />} />
           {/** *********** Sign Up Page ******************/}
           <Route path={'/sign-up'} element={<SignUp />} />
-
+          {/** *********** Auth Check ******************/}
           <Route element={<AuthLayout />}>
             {/** *********** User Page ******************/}
             <Route path={'/user'} element={<User />} />

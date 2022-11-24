@@ -1,21 +1,15 @@
-import React, { useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
-import { useProfileMutation } from '../../redux/services/auth.service'
-import { setFirstName } from '../../redux/slices/auth.slice'
-import { allAccounts, allTransactions, getLocalToken } from '../../utils/localDatas'
+import React from 'react'
+import { useTypedSelector } from '../../redux/hooks/store'
+import { allAccounts, allTransactions } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
 import Transaction from '../../components/transaction/Transaction'
 import { IAccount } from '../../redux/services/transaction.service'
 
 const Transactions = () => {
-  const dispatch = useAppDispatch(),
-    navigate = useNavigate(),
-    { accountId } = useTypedSelector((state) => state.auth),
+  const { accountId } = useTypedSelector((state) => state.auth),
     selectedAccount: IAccount | undefined = allAccounts.find((account) => account.id === accountId)
 
   let newBalance = selectedAccount.balance
-
 
   return (
     <React.Fragment>

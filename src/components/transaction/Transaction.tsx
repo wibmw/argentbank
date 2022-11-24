@@ -32,14 +32,14 @@ const Transaction = (props: { transaction: Transaction; balance }) => {
           {isCollapsed && (
             <div className='transaction_wrapper_bottom'>
               {/** *********** Transaction Type ******************/}
-              <span>{'Transaction Type: ' + type + ' '}</span>
+              <span>{'Transaction Type: ' + type}</span>
               {/** *********** Transaction Category ******************/}
               <span>
                 {'Category: ' + category + ' '} <i className='fas fa-pen'></i>
               </span>
               {/** *********** Transaction Note ******************/}
               <span>
-                {'Notes: ' + note} <i className='fas fa-pen'></i>
+                {'Notes: ' + note + ' '} <i className='fas fa-pen'></i>
               </span>
             </div>
           )}

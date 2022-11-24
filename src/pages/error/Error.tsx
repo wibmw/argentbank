@@ -1,12 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-/**
- * React Component: Error Page
- *
- * @module
- * @returns {*}
- */
 const Error = () => {
   return (
     <React.Fragment>

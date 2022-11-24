@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Names from '../../components/forms/Names'
 import { useTypedSelector } from '../../redux/hooks/store'
 import { useUpdateProfileMutation } from '../../redux/services/auth.service'
-import { getLocalToken } from '../../utils/localDatas'
 
 const User = () => {
   // Update User info

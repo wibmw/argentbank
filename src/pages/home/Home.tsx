@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <React.Fragment>
       {/** *********** Home Page ******************/}
-      <section id=''>
+      <section id='home'>
         <Hero />
         <Features />
       </section>

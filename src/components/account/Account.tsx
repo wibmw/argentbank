@@ -33,7 +33,7 @@ const Account = (props: {
               dispatch(setActiveAccount({ id }))
             }}
           >
-            {/** *********** Button to Transactions details ******************/}
+            {/** *********** Link to Transactions details ******************/}
 
             <Link to={'/transactions'} className='main-nav-item'>
               <button className='transaction-button'>View transactions</button>

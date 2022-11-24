@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import argentBankLogo from '../../../assets/img/argentBankLogo.png'
 import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
 import { setToken } from '../../../redux/slices/auth.slice'
 import { getLocalToken } from '../../../utils/localDatas'
 import Cookies from 'universal-cookie'
+import argentBankLogo from '../../../assets/img/argentBankLogo.png'
 
 const Header = () => {
   const dispatch = useAppDispatch(),
