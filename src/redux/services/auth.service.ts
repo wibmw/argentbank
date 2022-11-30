@@ -60,35 +60,32 @@ export interface Token {
   token: string
 }
 // User Credentials Interface
-export interface ProfileCredentials {
-  email: string
-  password: string
+export interface Credentials {
+  email: string | null
+  password: string | null
+}
+export interface ProfileCredentials extends Credentials {
   isEmailValid?: boolean
   isPasswordValid?: boolean
 }
 // User Profile Data Interface
-export interface ProfileDatas {
-  email: string
-  firstName: string
-  lastName: string
+export interface ProfileDatas extends Credentials, Names {
   createdAt: string
   updatedAt: string
   id: string
 }
 // User Names Interface
-export interface ProfileNames {
+export interface Names {
   firstName: string | null
   lastName: string | null
+}
+export interface ProfileNames extends Names {
   isFirstNameValid?: boolean
   isLastNameValid?: boolean
 }
 // Data to SignUp Interface
-export interface SignupRequest {
-  firstName: string | null
-  lastName: string | null
-  email: string
-  password: string
-}
+export interface SignupRequest extends ProfileCredentials, ProfileNames {}
+
 // SignUp Response Interface
 export interface SignupResponse {
   email: string

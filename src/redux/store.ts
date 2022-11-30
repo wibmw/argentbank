@@ -4,8 +4,7 @@ import authReducer from './slices/auth.slice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 import storage from 'redux-persist/lib/storage'
-import { persistReducer, persistStore } from 'redux-persist'
-import thunk from 'redux-thunk'
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +19,12 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     auth: persistedReducer,
   },
-  middleware: [thunk]// ,(getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(authApi.middleware),
 })
 
 // Store type
