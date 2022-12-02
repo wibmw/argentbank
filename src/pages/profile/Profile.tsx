@@ -9,7 +9,7 @@ import Account from '../../components/account/Account'
 const Profile = () => {
   const dispatch = useAppDispatch(),
     // Get User Names
-    [names, setNames] = useState<INames>({ firstName: 'test', lastName: '' }),
+    [names, setNames] = useState<INames>({ firstName: '', lastName: '' }),
     // Get Profile Info
     [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
 
@@ -23,7 +23,7 @@ const Profile = () => {
     } else if (isError) {
       // Else show error message in console
       console.log(status)
-      if ((error as any).data.message === 'User not Verified') {
+      if ((error as any)?.data?.message === 'User not Verified') {
         console.log('User not Verified')
       }
       console.log(error)

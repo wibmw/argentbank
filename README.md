@@ -42,17 +42,3 @@ Run `SASS` mode to generate the `style.css` from all `*.scss` files and apply st
 ```bash
  yarn run sass
 ```
-
-### 2- Documentation
-
-Launches the Js Doc generation.
-```bash
- yarn run docs
-```
-
-### 3- Tests
-
-Launches the test runner.
-```bash
- yarn test
-```
