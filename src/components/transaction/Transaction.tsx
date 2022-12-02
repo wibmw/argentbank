@@ -1,20 +1,18 @@
 import moment from 'moment'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { thousandsSeparator } from '../../utils/formatter'
 
-const Transaction = (props: { transaction: Transaction; balance }) => {
-  const { createdAt: date, amount, currency, description, type, category, note } = props.transaction
-
-  const [isCollapsed, setIsCollapsed] = useState(false)
-
-  /** *********** Collapse Animation ******************/
-  const transactionCollapse = (e) => {
-    e.preventDefault()
-    setIsCollapsed(!isCollapsed)
-  }
+const Transaction = (props: { transaction: ITransaction; balance }) => {
+  const { createdAt: date, amount, currency, description, type, category, note } = props.transaction,
+    [isCollapsed, setIsCollapsed] = useState(false),
+    /** *********** Collapse Animation ******************/
+    transactionCollapse = (e) => {
+      e.preventDefault()
+      setIsCollapsed(!isCollapsed)
+    }
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Transaction ******************/}
       <article className='transaction' onClick={transactionCollapse}>
         <i className={`fas fa-chevron-down chevron ${isCollapsed ? 'chevron-rotate' : 'chevron-unrotate'}`}></i>
@@ -45,12 +43,12 @@ const Transaction = (props: { transaction: Transaction; balance }) => {
           )}
         </div>
       </article>
-    </React.Fragment>
+    </>
   )
 }
 
 // Transaction Interface
-export interface Transaction {
+export interface ITransaction {
   id: number
   accountId: number
   amount: number

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Credentials from '../../components/forms/Credentials'
 import Names from '../../components/forms/Names'
 import { useTypedSelector } from '../../redux/hooks/store'
-import { SignupRequest, useSignupMutation } from '../../redux/services/auth.service'
+import { ISignupRequest, useSignupMutation } from '../../redux/services/auth.service'
 import { getLocalToken } from '../../utils/localDatas'
 
 const SignUp = () => {
@@ -26,7 +26,7 @@ const SignUp = () => {
     }
   }, [token, isSuccess, isError])
 
-  let formState: SignupRequest
+  let formState: ISignupRequest
   const { firstName, lastName, isFirstNameValid, isLastNameValid } = useTypedSelector((state) => state.auth.namesForm),
     { email, password, isEmailValid, isPasswordValid } = useTypedSelector((state) => state.auth.credentialsForm),
     // Check and stock form's data
@@ -47,7 +47,7 @@ const SignUp = () => {
     }
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Sign Up Page ******************/}
       <main className='main bg-dark'>
         <section className='form-content'>
@@ -71,7 +71,7 @@ const SignUp = () => {
           </form>
         </section>
       </main>
-    </React.Fragment>
+    </>
   )
 }
 

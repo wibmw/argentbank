@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Names from '../../components/forms/Names'
 import { useTypedSelector } from '../../redux/hooks/store'
@@ -32,7 +32,7 @@ const User = () => {
     }
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** User Page ******************/}
       <main className='main bg-dark'>
         <section className='form-content'>
@@ -55,7 +55,7 @@ const User = () => {
           </form>
         </section>
       </main>
-    </React.Fragment>
+    </>
   )
 }
 

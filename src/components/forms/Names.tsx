@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../redux/hooks/store'
-import { ProfileNames } from '../../redux/services/auth.service'
+import { IProfileNames } from '../../redux/services/auth.service'
 import { setNamesForm } from '../../redux/slices/auth.slice'
 import { namesCheck } from '../../utils/formValidation'
 
 const Names = () => {
   const dispatch = useAppDispatch(),
     // Names Form datas
-    [namesFormState, setFormState] = useState<ProfileNames>({
+    [namesFormState, setFormState] = useState<IProfileNames>({
       firstName: '',
       lastName: '',
       isFirstNameValid: false,
@@ -24,7 +24,7 @@ const Names = () => {
   }, [namesFormState])
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Names Inputs ******************/}
       <div className='input-wrapper'>
         <label htmlFor='firstname'>Firstname</label>
@@ -34,7 +34,7 @@ const Names = () => {
         <label htmlFor='lastname'>Lastname</label>
         <input type='text' id='lastname' name='lastName' onChange={handleChange} />
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

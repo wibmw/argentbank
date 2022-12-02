@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/hooks/store'
 import { setActiveAccount } from '../../redux/slices/auth.slice'
@@ -16,7 +15,7 @@ const Account = (props: {
     dispatch = useAppDispatch()
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Account Informations ******************/}
       <section className={accountPage ? 'account' : 'account account-header'}>
         <div>
@@ -35,13 +34,13 @@ const Account = (props: {
           >
             {/** *********** Link to Transactions details ******************/}
 
-            <Link to={'/transactions'} className='main-nav-item'>
+            <Link to={'/transactions'}>
               <button className='transaction-button'>View transactions</button>
             </Link>
           </div>
         )}
       </section>
-    </React.Fragment>
+    </>
   )
 }
 

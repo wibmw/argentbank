@@ -9,6 +9,8 @@
   border-color: $primary-color;
   background-color: $primary-color;
   color: $text-light-color;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /****************** Content ************************/
@@ -19,6 +21,9 @@
   margin: 0 auto;
   margin-top: 3rem;
   padding: 2rem;
+  & a {
+    text-decoration: none;
+  }
 }
 
 /****************** Icon ************************/
@@ -29,6 +34,9 @@
 /****************** Checkbox remember me ************************/
 .input-remember {
   display: flex;
+  & input {
+    cursor: pointer;
+  }
   & label {
     margin-left: 0.25rem;
   }

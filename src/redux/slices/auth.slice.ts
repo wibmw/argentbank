@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProfileCredentials, ProfileNames } from '../services/auth.service'
+import { IProfileCredentials, IProfileNames } from '../services/auth.service'
 
 // Initiate all state values
-const initialValues: Auth = {
+const initialValues: IAuth = {
   token: null,
   firstName: '',
   namesForm: { firstName: '', lastName: '' },
@@ -28,10 +28,10 @@ const authSlice = createSlice({
     setFirstName: (state, action: PayloadAction<{ firstName: string }>) => {
       state.firstName = action.payload.firstName
     },
-    setNamesForm: (state, action: PayloadAction<{ namesForm: ProfileNames }>) => {
+    setNamesForm: (state, action: PayloadAction<{ namesForm: IProfileNames }>) => {
       state.namesForm = action.payload.namesForm
     },
-    setCredentialsForm: (state, action: PayloadAction<{ credentialsForm: ProfileCredentials }>) => {
+    setCredentialsForm: (state, action: PayloadAction<{ credentialsForm: IProfileCredentials }>) => {
       state.credentialsForm = action.payload.credentialsForm
     },
     setActiveAccount: (state, action: PayloadAction<{ id: number }>) => {
@@ -44,11 +44,11 @@ const authSlice = createSlice({
 })
 
 // Initiate types
-type Auth = {
+interface IAuth {
   token: string | null
   firstName: string | null
-  namesForm: ProfileNames | null
-  credentialsForm: ProfileCredentials | null
+  namesForm: IProfileNames | null
+  credentialsForm: IProfileCredentials | null
   accountId: number | null
 }
 

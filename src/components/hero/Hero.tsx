@@ -1,8 +1,6 @@
-import React from 'react'
-
 const Hero = () => {
   return (
-    <React.Fragment>
+    <>
       {/** *********** Hero Section ******************/}
       <div className='hero'>
         <section className='hero-content'>
@@ -13,7 +11,7 @@ const Hero = () => {
           <p className='text'>Open a savings account with Argent Bank today!</p>
         </section>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 export default Hero

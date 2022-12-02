@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTypedSelector } from '../../redux/hooks/store'
 import { allAccounts, allTransactions } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
@@ -12,7 +11,7 @@ const Transactions = () => {
   let newBalance = selectedAccount.balance
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Profile Page ******************/}
       <section className='main bg-dark'>
         <div className='header'>
@@ -54,7 +53,7 @@ const Transactions = () => {
           </div>
         </main>
       </section>
-    </React.Fragment>
+    </>
   )
 }
 

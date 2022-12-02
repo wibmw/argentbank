@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Credentials from '../../components/forms/Credentials'
 import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
@@ -42,7 +42,7 @@ const SignIn = () => {
     }
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Sign In Page ******************/}
       <main className='main bg-dark'>
         <section className='form-content'>
@@ -72,7 +72,7 @@ const SignIn = () => {
           </form>
         </section>
       </main>
-    </React.Fragment>
+    </>
   )
 }
 

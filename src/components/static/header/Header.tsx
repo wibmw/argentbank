@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useTypedSelector } from '../../../redux/hooks/store'
 import { setToken } from '../../../redux/slices/auth.slice'
@@ -21,7 +20,7 @@ const Header = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Header Section ******************/}
       <header id=''>
         {/** *********** Nav Section ******************/}
@@ -36,10 +35,10 @@ const Header = () => {
               <>
                 <Link to={'/profile'} className='main-nav-item'>
                   <i className='fas fa-user-circle'></i>
-                  {firstName}
+                  {firstName + '   '}
                 </Link>
                 <Link to={'/'} className='main-nav-item' onClick={logout}>
-                  <i className='fas fa-sign-out'></i>
+                  <i className='fas fa-sign-out-alt'></i>
                   Sign Out
                 </Link>
               </>
@@ -55,7 +54,7 @@ const Header = () => {
           </div>
         </nav>
       </header>
-    </React.Fragment>
+    </>
   )
 }
 export default Header

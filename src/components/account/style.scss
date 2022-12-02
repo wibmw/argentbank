@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
+  border-radius: 10px;
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
@@ -20,6 +21,7 @@
   width: 100%;
   justify-content: center;
   text-align: center;
+  border-radius: 0;
 }
 
 /****************** Amount ************************/
@@ -46,6 +48,9 @@
 .account-content-wrapper {
   width: 100%;
   flex: 1;
+  & a {
+    text-decoration: none;
+  }
 }
 
 /****************** Buttons ************************/
@@ -55,6 +60,8 @@
   color: $text-light-color;
   font-weight: bold;
   padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .transaction-button {
@@ -67,6 +74,9 @@
   border-color: $primary-color;
   background-color: $primary-color;
   color: $text-light-color;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 /****************** Media Query ************************/

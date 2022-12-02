@@ -27,7 +27,7 @@ export const transactionApi = createApi({
       },
     }),
     // Transaction --> Return informations of the selected transaction
-    transaction: builder.mutation<ITransaction, ITransactionId>({
+    transaction: builder.mutation<ITransaction, Id>({
       query: (id) => {
         return {
           url: 'transaction',
@@ -57,7 +57,7 @@ export const transactionApi = createApi({
       },
     }),
     // deleteTransaction --> Delete the selected transaction
-    deleteTransaction: builder.mutation<void, ITransactionId>({
+    deleteTransaction: builder.mutation<void, Id>({
       query: (id) => {
         return {
           url: 'deleteTransaction',
@@ -69,13 +69,15 @@ export const transactionApi = createApi({
   }),
 })
 
-interface ISelectedMonth {
+interface Id {
   id: number
+}
+
+interface ISelectedMonth extends Id {
   month: string
 }
 
-interface ITransaction {
-  id: number
+interface ITransaction extends Id {
   accountId: number
   description: string
   amount: number
@@ -87,12 +89,7 @@ interface ITransaction {
   updatedAt?: string
 }
 
-type ITransactionId = {
-  id: number
-}
-
-export interface IAccount {
-  id: number
+export interface IAccount extends Id {
   userId: number
   name: string
   balance: number

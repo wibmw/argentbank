@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../redux/hooks/store'
-import { ProfileCredentials } from '../../redux/services/auth.service'
+import { IProfileCredentials } from '../../redux/services/auth.service'
 import { setCredentialsForm } from '../../redux/slices/auth.slice'
 import { emailCheck, passwordCheck } from '../../utils/formValidation'
 
 const Credentials = () => {
   const dispatch = useAppDispatch(),
     // Credentials Form datas
-    [credentialsFormState, setFormState] = useState<ProfileCredentials>({
+    [credentialsFormState, setFormState] = useState<IProfileCredentials>({
       email: '',
       password: '',
       isEmailValid: false,
@@ -25,7 +25,7 @@ const Credentials = () => {
   }, [credentialsFormState])
 
   return (
-    <React.Fragment>
+    <>
       {/** *********** Names Inputs ******************/}
       <div className='input-wrapper'>
         <label htmlFor='email'>Username</label>
@@ -35,7 +35,7 @@ const Credentials = () => {
         <label htmlFor='password'>Password</label>
         <input type='password' id='password' name='password' onChange={handleChange} />
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

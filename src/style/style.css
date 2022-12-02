@@ -240,6 +240,7 @@ html {
   justify-content: space-between;
   align-items: center;
   border: 1px solid black;
+  border-radius: 10px;
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
@@ -256,6 +257,7 @@ html {
   width: 100%;
   justify-content: center;
   text-align: center;
+  border-radius: 0;
 }
 
 /****************** Amount ************************/
@@ -283,6 +285,9 @@ html {
   width: 100%;
   flex: 1;
 }
+.account-content-wrapper a {
+  text-decoration: none;
+}
 
 /****************** Buttons ************************/
 .edit-button {
@@ -291,6 +296,8 @@ html {
   color: #fff;
   font-weight: bold;
   padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .transaction-button {
@@ -303,6 +310,9 @@ html {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 /****************** Media Query ************************/
@@ -378,6 +388,8 @@ html {
   border-color: #00bc77;
   background-color: #00bc77;
   color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 /****************** Content ************************/
@@ -389,6 +401,9 @@ html {
   margin-top: 3rem;
   padding: 2rem;
 }
+.form-content a {
+  text-decoration: none;
+}
 
 /****************** Icon ************************/
 .form-icon {
@@ -398,6 +413,9 @@ html {
 /****************** Checkbox remember me ************************/
 .input-remember {
   display: flex;
+}
+.input-remember input {
+  cursor: pointer;
 }
 .input-remember label {
   margin-left: 0.25rem;
@@ -483,6 +501,7 @@ p[data-error] {
   margin-left: 10px;
   width: 25px;
   height: 15px;
+  cursor: pointer;
 }
 .chevron-unrotate {
   transform: rotate(0deg);

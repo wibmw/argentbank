@@ -1,9 +1,8 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Error = () => {
   return (
-    <React.Fragment>
+    <>
       {/** *********** Error 404 section ******************/}
       <section id='error404'>
         {/** *********** Error Title ******************/}
@@ -15,7 +14,7 @@ const Error = () => {
           <u>Retourner à la page d’accueil</u>
         </Link>
       </section>
-    </React.Fragment>
+    </>
   )
 }
 export default Error

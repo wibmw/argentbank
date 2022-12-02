@@ -16,7 +16,7 @@ export const authApi = createApi({
   }),
   // Login --> Return the auth token
   endpoints: (builder) => ({
-    login: builder.mutation<Token, ProfileCredentials>({
+    login: builder.mutation<IToken, IProfileCredentials>({
       query: (credentials) => ({
         url: 'login',
         method: 'POST',
@@ -24,7 +24,7 @@ export const authApi = createApi({
       }),
     }),
     // Profile --> Return the user profile
-    profile: builder.mutation<ProfileDatas, void>({
+    profile: builder.mutation<IProfileDatas, void>({
       query: () => {
         return {
           url: 'profile',
@@ -33,7 +33,7 @@ export const authApi = createApi({
       },
     }),
     // SignUp --> Register a new user
-    signup: builder.mutation<SignupResponse, SignupRequest>({
+    signup: builder.mutation<ISignupResponse, ISignupRequest>({
       query: (accountInfos) => {
         return {
           url: 'signup',
@@ -43,7 +43,7 @@ export const authApi = createApi({
       },
     }),
     // updateProfile --> Update user names
-    updateProfile: builder.mutation<void, ProfileNames>({
+    updateProfile: builder.mutation<void, IProfileNames>({
       query: (namesForm) => {
         return {
           url: 'profile',
@@ -56,38 +56,38 @@ export const authApi = createApi({
 })
 
 // Token Interface
-export interface Token {
+export interface IToken {
   token: string
 }
 // User Credentials Interface
-export interface Credentials {
+export interface ICredentials {
   email: string | null
   password: string | null
 }
-export interface ProfileCredentials extends Credentials {
+export interface IProfileCredentials extends ICredentials {
   isEmailValid?: boolean
   isPasswordValid?: boolean
 }
 // User Profile Data Interface
-export interface ProfileDatas extends Credentials, Names {
+export interface IProfileDatas extends ICredentials, INames {
   createdAt: string
   updatedAt: string
   id: string
 }
 // User Names Interface
-export interface Names {
+export interface INames {
   firstName: string | null
   lastName: string | null
 }
-export interface ProfileNames extends Names {
+export interface IProfileNames extends INames {
   isFirstNameValid?: boolean
   isLastNameValid?: boolean
 }
 // Data to SignUp Interface
-export interface SignupRequest extends ProfileCredentials, ProfileNames {}
+export interface ISignupRequest extends IProfileCredentials, IProfileNames {}
 
 // SignUp Response Interface
-export interface SignupResponse {
+export interface ISignupResponse {
   email: string
   id: string
 }

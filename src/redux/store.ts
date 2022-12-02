@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import { authApi } from './services/auth.service'
 import authReducer from './slices/auth.slice'
 import { setupListeners } from '@reduxjs/toolkit/query'
-
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 

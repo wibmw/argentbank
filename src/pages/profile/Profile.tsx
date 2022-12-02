@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react'
-import { Link, useLocation, useLoaderData } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/hooks/store'
-import { useProfileMutation } from '../../redux/services/auth.service'
+import { INames, useProfileMutation } from '../../redux/services/auth.service'
 import { setFirstName } from '../../redux/slices/auth.slice'
 import { allAccounts } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
 
 const Profile = () => {
   const dispatch = useAppDispatch(),
-    { state } = useLocation(),
-    // Get profile Info
+    // Get User Names
+    [names, setNames] = useState<INames>({ firstName: 'test', lastName: '' }),
+    // Get Profile Info
     [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
 
-  let firstName, lastName
-  async () => profile()
   useEffect(() => {
+    profile()
     if (isSuccess) {
       // If success get datas
-      ;({ firstName, lastName } = data['body'])
+      const { firstName, lastName } = data['body']
       dispatch(setFirstName({ firstName: firstName }))
+      setNames({ firstName, lastName })
     } else if (isError) {
       // Else show error message in console
       console.log(status)
@@ -27,9 +28,10 @@ const Profile = () => {
       }
       console.log(error)
     }
-  }, [isSuccess, isError])
+  }, [isSuccess, isError, names])
+
   return (
-    <React.Fragment>
+    <>
       {/** *********** Profile Page ******************/}
       <main className='main bg-dark'>
         <div className='header'>
@@ -37,7 +39,7 @@ const Profile = () => {
             Welcome back
             <br />
             {/** *********** Display name ******************/}
-            {firstName + ' ' + lastName + ' !'}
+            {names.firstName + ' ' + names.lastName + ' !'}
           </h1>
           <Link to={'/user'}>
             {/** ***********  Edit Button  ******************/}
@@ -58,7 +60,7 @@ const Profile = () => {
           ></Account>
         ))}
       </main>
-    </React.Fragment>
+    </>
   )
 }
 
