@@ -1,13 +1,15 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Names from '../../components/forms/Names'
-import { useTypedSelector } from '../../redux/hooks/store'
+import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { useUpdateProfileMutation } from '../../redux/services/auth.service'
+import { setUserName } from '../../redux/slices/auth.slice'
 
 const User = () => {
   // Update User info
   const [updateProfile, { status, error, isSuccess, isError }] = useUpdateProfileMutation(),
-    navigate = useNavigate()
+    navigate = useNavigate(),
+    dispatch = useAppDispatch()
 
   useEffect(() => {
     // If success navigate to profile page
@@ -28,7 +30,10 @@ const User = () => {
     },
     // if datas are valid, update datas
     update = () => {
-      if (isValid()) updateProfile(formState)
+      if (isValid()) {
+        dispatch(setUserName({ userName: { firstName: formState.firstName, lastName: formState.lastName } }))
+        updateProfile(formState)
+      }
     }
 
   return (

@@ -9,7 +9,7 @@ const Header = () => {
   const dispatch = useAppDispatch(),
     navigate = useNavigate(),
     cookie = new Cookies(),
-    { firstName } = useTypedSelector((state) => state.auth),
+    { userName } = useTypedSelector((state) => state.auth),
     token = getLocalToken()
 
   // Logout function
@@ -35,7 +35,7 @@ const Header = () => {
               <>
                 <Link to={'/profile'} className='main-nav-item'>
                   <i className='fas fa-user-circle'></i>
-                  {firstName + '   '}
+                  {userName.firstName + '   '}
                 </Link>
                 <Link to={'/'} className='main-nav-item' onClick={logout}>
                   <i className='fas fa-sign-out-alt'></i>

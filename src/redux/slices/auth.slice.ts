@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IProfileCredentials, IProfileNames } from '../services/auth.service'
+import { INames, IProfileCredentials, IProfileNames } from '../services/auth.service'
 
 // Initiate all state values
 const initialValues: IAuth = {
   token: null,
-  firstName: '',
+  userName: { firstName: '', lastName: '' },
   namesForm: { firstName: '', lastName: '' },
   credentialsForm: { email: '', password: '' },
   accountId: 0,
@@ -25,8 +25,8 @@ const authSlice = createSlice({
     setToken: (state, action: PayloadAction<{ token: string }>) => {
       state.token = action.payload.token
     },
-    setFirstName: (state, action: PayloadAction<{ firstName: string }>) => {
-      state.firstName = action.payload.firstName
+    setUserName: (state, action: PayloadAction<{ userName:INames }>) => {
+      state.userName = action.payload.userName
     },
     setNamesForm: (state, action: PayloadAction<{ namesForm: IProfileNames }>) => {
       state.namesForm = action.payload.namesForm
@@ -46,12 +46,12 @@ const authSlice = createSlice({
 // Initiate types
 interface IAuth {
   token: string | null
-  firstName: string | null
+  userName: INames | null
   namesForm: IProfileNames | null
   credentialsForm: IProfileCredentials | null
   accountId: number | null
 }
 
 // export const setToken = (state: RootState) => state.auth.token // slice.actions
-export const { setToken, setFirstName, setNamesForm, setCredentialsForm, setActiveAccount } = authSlice.actions
+export const { setToken, setUserName, setNamesForm, setCredentialsForm, setActiveAccount } = authSlice.actions
 export default authSlice.reducer

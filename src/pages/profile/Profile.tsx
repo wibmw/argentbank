@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppDispatch } from '../../redux/hooks/store'
+import { useAppDispatch, useTypedSelector } from '../../redux/hooks/store'
 import { INames, useProfileMutation } from '../../redux/services/auth.service'
-import { setFirstName } from '../../redux/slices/auth.slice'
+import { setUserName } from '../../redux/slices/auth.slice'
 import { allAccounts } from '../../utils/localDatas'
 import Account from '../../components/account/Account'
 
 const Profile = () => {
   const dispatch = useAppDispatch(),
     // Get User Names
-    [names, setNames] = useState<INames>({ firstName: '', lastName: '' }),
+    { userName } = useTypedSelector((state) => state.auth),
     // Get Profile Info
     [profile, { data, status, error, isSuccess, isError }] = useProfileMutation()
 
@@ -18,8 +18,7 @@ const Profile = () => {
     if (isSuccess) {
       // If success get datas
       const { firstName, lastName } = data['body']
-      dispatch(setFirstName({ firstName: firstName }))
-      setNames({ firstName, lastName })
+      dispatch(setUserName({ userName: { firstName: firstName, lastName: lastName } }))
     } else if (isError) {
       // Else show error message in console
       console.log(status)
@@ -28,7 +27,7 @@ const Profile = () => {
       }
       console.log(error)
     }
-  }, [isSuccess, isError, names])
+  }, [profile, userName])
 
   return (
     <>
@@ -39,7 +38,7 @@ const Profile = () => {
             Welcome back
             <br />
             {/** *********** Display name ******************/}
-            {names.firstName + ' ' + names.lastName + ' !'}
+            {userName.firstName + ' ' + userName.lastName + ' !'}
           </h1>
           <Link to={'/user'}>
             {/** ***********  Edit Button  ******************/}
