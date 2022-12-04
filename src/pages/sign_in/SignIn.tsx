@@ -65,7 +65,7 @@ const SignIn = () => {
               Sign In
             </div>
             {/** *********** Error ******************/}
-            {isError ? <p data-error='true'> {error['data']['message']} </p> : null}
+            {isError ? <p data-error='true'> {error && error['data']['message']} </p> : null}
             <br />
             {/** *********** Navigate to new account page ******************/}
             <Link to={'/sign-up'}>Create a new account</Link>
